@@ -1,2 +1,3 @@
-# java-demo
-# java-demo
+# Java Demo App
+
+## Practice course project
