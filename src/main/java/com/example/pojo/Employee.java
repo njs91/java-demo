@@ -3,14 +3,16 @@ package com.example.pojo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-//specifies this class is part of the ORM
+// This annotation specifies that this class is a database entity (table).
 @Entity
 public class Employee {
-    //this attribute is having a primary key
+    // This field represents the primary key of the Employee table.
     @Id
-    private int empNo;
-    private String eName;
-    private String phoneNo;
+    private int empNo; // Employee number (unique identifier).
+    private String eName; // Employee name.
+    private String phoneNo; // Employee phone number.
+
+    // Getter and setter methods are used to read and update the field values.
 
     public int getEmpNo() {
         return empNo;
