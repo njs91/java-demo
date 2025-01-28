@@ -38,4 +38,9 @@ public class EmployeeService {
     public String getPhoneByName(String eName, int id) {
         return repo.getPhoneByName(eName, id);
     }
+
+    // Get employee details by their ID.
+    public Object[] findByEmpno(int id) {
+        return repo.findByEmpno(id);
+    }
 }

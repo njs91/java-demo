@@ -13,4 +13,11 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
     // Custom query method to get the phone number by employee name and ID.
     @Query(sql)
     public String getPhoneByName(String ename, int id);
+
+    // SQL query to fetch employee details by their ID.
+    String sql1 = "select e.eName, e.phoneNo, e.emphiredate from Employee e where e.empNo=?1";
+
+    // Custom query method to get employee details by their ID.
+    @Query(sql1)
+    public Object[] findByEmpno(int id);
 }

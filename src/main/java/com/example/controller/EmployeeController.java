@@ -85,4 +85,12 @@ public class EmployeeController {
         // Call the service layer to fetch the phone number by employee name and ID.
         return service.getPhoneByName(eName, id);
     }
+
+    @GetMapping("/getDatabyId/{id}")
+    public String findByEmpno(@PathVariable("id") int id){
+        Object[] result=service.findByEmpno(id);
+        Object[] value=(Object[])result[0];
+        String name=(String)value[0];
+        return name;
+    }
 }
