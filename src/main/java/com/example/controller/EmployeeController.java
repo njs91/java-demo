@@ -1,52 +1,74 @@
+// This package contains all the controller classes for handling HTTP requests.
 package com.example.controller;
 
-import com.example.pojo.Employee;
-import com.example.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+// Importing necessary classes and annotations.
+import com.example.pojo.Employee; // The Employee entity class.
+import com.example.service.EmployeeService; // The service layer to handle business logic.
+import org.springframework.beans.factory.annotation.Autowired; // Annotation for dependency injection.
+import org.springframework.web.bind.annotation.*; // Spring annotations for REST API endpoints.
 
-import java.util.List;
+import java.util.List; // For working with lists of employees.
+import java.util.Optional; // For working with optional results.
 
-import java.util.Optional;
-
-// Mark this class as a REST controller, meaning it will handle HTTP requests and return responses in JSON format.
+// Mark this class as a REST controller, meaning it will handle HTTP requests and return JSON responses.
 @RestController
 public class EmployeeController {
 
-    // Automatically inject the EmployeeService object (dependency injection).
+    // Automatically inject the EmployeeService object using dependency injection.
     @Autowired
     EmployeeService service;
 
-    // This method handles POST requests to the "/insert" endpoint.
-    // It takes an Employee object as input from the request body (JSON) and returns the saved Employee object.
+    /**
+     * Handles POST requests to the "/insert" endpoint.
+     *
+     * @param employee The employee object sent in the request body (in JSON format).
+     * @return The saved Employee object after inserting it into the database.
+     */
     @PostMapping("/insert")
     public Employee insert(@RequestBody Employee employee) {
-        // Call the service layer to insert the employee into the database.
+        // Pass the employee object to the service layer to save it to the database.
         return service.insertEmployee(employee);
     }
 
+    /**
+     * Handles POST requests to the "/insertAll" endpoint.
+     *
+     * @param employees A list of employee objects sent in the request body (in JSON format).
+     * @return A list of saved Employee objects after inserting them into the database.
+     */
     @PostMapping("/insertAll")
-    //from postman supply the data to this object
-    public List<Employee> insert(@RequestBody List<Employee> employees){
+    public List<Employee> insert(@RequestBody List<Employee> employees) {
+        // Pass the list of employees to the service layer to save them all at once.
         return service.insertAll(employees);
     }
 
+    /**
+     * Handles GET requests to the "/getById/{id}" endpoint.
+     *
+     * @param id The ID of the employee to retrieve (sent as a path variable in the URL).
+     * @return An Optional object containing the Employee with the specified ID if found, or empty otherwise.
+     */
     @GetMapping("/getById/{id}")
-    public Optional<Employee> getByid(@PathVariable("id") int id){
+    public Optional<Employee> getByid(@PathVariable("id") int id) {
+        // Call the service layer to fetch the employee by their ID.
         return service.getByid(id);
     }
 
+    /**
+     * Handles DELETE requests to the "/deleteById/{id}" endpoint.
+     *
+     * @param id The ID of the employee to delete (sent as a path variable in the URL).
+     * @return A string message indicating whether the deletion was successful or not.
+     */
     @DeleteMapping("/deleteById/{id}")
     public String deleteById(@PathVariable("id") int id) {
+        // Check if the employee with the given ID exists.
         if (service.getByid(id).isPresent()) {
-            service.deleteById(id); // Correct method name
+            // If the employee exists, delete them using the service layer.
+            service.deleteById(id);
             return "Deleted the value " + id;
         } else {
+            // If the employee doesn't exist, return a "not found" message.
             return "Data is not found";
         }
     }
