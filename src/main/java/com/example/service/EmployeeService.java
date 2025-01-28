@@ -33,4 +33,9 @@ public class EmployeeService {
     public void deleteById(int id) {
         repo.deleteById(id); // Use the deleteById method provided by JpaRepository.
     }
+
+    public String findPhnoByname(String ename,int id){
+        return repo.findPhnoByname(ename,id);
+    }
+
 }

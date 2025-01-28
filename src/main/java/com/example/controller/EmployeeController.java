@@ -72,4 +72,10 @@ public class EmployeeController {
             return "Data is not found";
         }
     }
+
+    @GetMapping("/getbyName/{name}/{id}")
+    public String findPhnoByname(@PathVariable("name") String ename,@PathVariable("id") int id){
+        return service.findPhnoByname(ename,id);
+    }
+
 }
