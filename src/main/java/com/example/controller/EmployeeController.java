@@ -73,9 +73,8 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/getbyName/{name}/{id}")
-    public String findPhnoByname(@PathVariable("name") String ename,@PathVariable("id") int id){
-        return service.findPhnoByname(ename,id);
+    @GetMapping("/getByName/{name}/{id}")
+    public String getPhoneByName(@PathVariable("name") String eName,@PathVariable("id") int id){
+        return service.getPhoneByName(eName,id);
     }
-
 }

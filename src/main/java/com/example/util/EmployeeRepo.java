@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface EmployeeRepo extends JpaRepository<Employee,Integer> {
     String sql="select e.phoneNo from Employee e where e.eName=?1 and e.empNo=?2";
     @Query(sql)
-    public String findPhnoByname(String ename,int id);
+    public String getPhoneByName(String ename,int id);
 }
