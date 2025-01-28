@@ -73,8 +73,16 @@ public class EmployeeController {
         }
     }
 
+    /**
+     * Handles GET requests to the "/getByName/{name}/{id}" endpoint.
+     *
+     * @param name The name of the employee to retrieve the phone number for (sent as a path variable in the URL).
+     * @param id The ID of the employee to retrieve the phone number for (sent as a path variable in the URL).
+     * @return The phone number of the employee with the specified name and ID.
+     */
     @GetMapping("/getByName/{name}/{id}")
-    public String getPhoneByName(@PathVariable("name") String eName,@PathVariable("id") int id){
-        return service.getPhoneByName(eName,id);
+    public String getPhoneByName(@PathVariable("name") String eName, @PathVariable("id") int id) {
+        // Call the service layer to fetch the phone number by employee name and ID.
+        return service.getPhoneByName(eName, id);
     }
 }

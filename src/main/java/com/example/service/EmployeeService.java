@@ -34,8 +34,8 @@ public class EmployeeService {
         repo.deleteById(id); // Use the deleteById method provided by JpaRepository.
     }
 
-    public String getPhoneByName(String eName,int id){
-        return repo.getPhoneByName(eName,id);
+    // Get the phone number of an employee by their name and ID.
+    public String getPhoneByName(String eName, int id) {
+        return repo.getPhoneByName(eName, id);
     }
-
 }
