@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AdminLogin from "./pages/AdminLogin";
-import AdminCreateAccount from "./pages/AdminCreateAccount";
-import AdminManagement from "./pages/AdminManagement";
-import UserLogin from "./pages/UserLogin";
-import UserCreateAccount from "./pages/UserCreateAccount";
-import UserShopping from "./pages/UserShopping";
-import UserBasket from "./pages/UserBasket";
-import Homepage from "./pages/Homepage";
+import AdminLogin from "./pages/admin/login/AdminLogin";
+import AdminCreateAccount from "./pages/admin/create-account/AdminCreateAccount";
+import AdminManagement from "./pages/admin/management/AdminManagement";
+import UserLogin from "./pages/user/login/UserLogin";
+import UserCreateAccount from "./pages/user/create-account/UserCreateAccount";
+import UserShopping from "./pages/user/shopping/UserShopping";
+import UserBasket from "./pages/user/basket/UserBasket";
+import Homepage from "./pages/homepage/Homepage";
 
 const App = () => {
   return (
