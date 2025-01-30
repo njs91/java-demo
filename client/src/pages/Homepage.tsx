@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./style.module.scss";
 
 const Homepage: React.FC = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Welcome to the Homepage</h1>
       <div>
         <h2>Admin</h2>
