@@ -8,12 +8,14 @@ import UserLogin from "./pages/UserLogin";
 import UserCreateAccount from "./pages/UserCreateAccount";
 import UserShopping from "./pages/UserShopping";
 import UserBasket from "./pages/UserBasket";
+import Homepage from "./pages/Homepage";
 
 const App = () => {
   return (
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/" element={<Homepage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/admin/create-account"
