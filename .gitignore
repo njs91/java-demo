@@ -36,3 +36,16 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Node.js & React
+node_modules/
+build/
+*.log
+*.tsbuildinfo
+
+# React development environment
+/.env
+/.env.local
+/.env.*.local
+/.pnp.*
+.pnp.js
