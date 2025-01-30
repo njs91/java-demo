@@ -2,26 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.scss";
 
-const Homepage: React.FC = () => {
+const Homepage = () => {
   return (
     <div className={styles.container}>
-      <h1>Welcome to the Homepage</h1>
+      <h1>Java Project Home</h1>
+      <p>by Nick Smith</p>
       <div>
-        <h2>Admin</h2>
+        <h2>Admins:</h2>
         <Link to="/admin/login">
-          <button>Login</button>
+          <button className={styles.button}>Login</button>
         </Link>
         <Link to="/admin/create-account">
-          <button>Create Account</button>
+          <button className={styles.button}>Create Account</button>
         </Link>
       </div>
       <div>
-        <h2>User</h2>
+        <h2>Users:</h2>
         <Link to="/user/login">
-          <button>Login</button>
+          <button className={styles.button}>Login</button>
         </Link>
         <Link to="/user/create-account">
-          <button>Create Account</button>
+          <button className={styles.button}>Create Account</button>
         </Link>
       </div>
     </div>
