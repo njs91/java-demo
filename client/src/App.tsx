@@ -4,6 +4,10 @@ import "./App.css";
 import AdminLogin from "./pages/AdminLogin";
 import AdminCreateAccount from "./pages/AdminCreateAccount";
 import AdminManagement from "./pages/AdminManagement";
+import UserLogin from "./pages/UserLogin";
+import UserCreateAccount from "./pages/UserCreateAccount";
+import UserShopping from "./pages/UserShopping";
+import UserBasket from "./pages/UserBasket";
 
 const App = () => {
   return (
@@ -16,6 +20,10 @@ const App = () => {
             element={<AdminCreateAccount />}
           />
           <Route path="/admin/management" element={<AdminManagement />} />
+          <Route path="/user/login" element={<UserLogin />} />
+          <Route path="/user/create-account" element={<UserCreateAccount />} />
+          <Route path="/user/shopping" element={<UserShopping />} />
+          <Route path="/user/basket" element={<UserBasket />} />
         </Routes>
       </div>
     </Router>

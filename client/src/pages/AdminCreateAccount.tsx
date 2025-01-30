@@ -1,6 +1,6 @@
 import React from "react";
 
-const AdminCreateAccount: React.FC = () => {
+const AdminCreateAccount = () => {
   return (
     <div>
       <h1>Create Admin Account</h1>

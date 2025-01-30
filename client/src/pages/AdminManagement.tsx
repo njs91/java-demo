@@ -1,6 +1,6 @@
 import React from "react";
 
-const AdminManagement: React.FC = () => {
+const AdminManagement = () => {
   return (
     <div>
       <h1>Admin Management</h1>
