@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-// This annotation tells Spring that this class is a REST controller.
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    // Automatically inject the ProductService object to handle business logic.
     @Autowired
     private ProductService productService;
 
