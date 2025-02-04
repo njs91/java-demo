@@ -8,11 +8,13 @@ import UserCreateAccount from "./pages/user/CreateAccount/CreateAccount";
 import UserShopping from "./pages/user/Shopping/Shopping";
 import UserBasket from "./pages/user/Basket/Basket";
 import Homepage from "./pages/Homepage/Homepage";
+import Navigation from "./components/Navigation/Navigation";
 
 const App = () => {
   return (
     <Router>
       <div className="App">
+        <Navigation />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
