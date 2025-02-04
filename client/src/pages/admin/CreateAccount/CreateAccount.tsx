@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 
-/*
-POST /users
-{
-    "username": "john_doe",
-    "password": "password123",
-    "role": "user"
-}
-*/
-
-const AdminCreateAccount: React.FC = () => {
+const AdminCreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
@@ -18,17 +9,17 @@ const AdminCreateAccount: React.FC = () => {
     event.preventDefault();
     const user = { username, password, role };
 
-    // http://localhost:8089/h2-console/login.do?jsessionid=271a506d96075a88f959be05f239a848
-
     try {
-      // const response = await fetch(`${process.env.REACT_APP_SITE_URL}/users`, {
-      const response = await fetch(`http://localhost:8089/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/users`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
