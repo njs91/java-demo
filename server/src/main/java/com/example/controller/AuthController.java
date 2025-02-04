@@ -20,8 +20,7 @@ public class AuthController {
     // Endpoint to login a user.
     @PostMapping("/login")
     public User loginUser(@RequestBody User user) {
-        // Implement login logic here.
-        return user;
+        return userService.loginUser(user);
     }
 
     // Endpoint to change a user's password.
