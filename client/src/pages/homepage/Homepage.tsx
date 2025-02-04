@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 const Homepage = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Java Project Home</h1>
       <p>by Nick Smith</p>
       <div>

@@ -1,7 +1,8 @@
 .nav {
   background-color: #007bff;
-  padding: 10px;
+  padding: 1em;
   width: 100%;
+  margin-bottom: 5rem;
 
   .navList {
     list-style: none;
@@ -16,7 +17,6 @@
       .navLink {
         color: #fff;
         text-decoration: none;
-        font-size: 16px;
         transition: color 0.3s ease;
 
         &:hover {
