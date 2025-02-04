@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AdminCreateAccount = () => {
+const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
@@ -38,7 +38,7 @@ const AdminCreateAccount = () => {
 
   return (
     <div>
-      <h1>Create Admin Account</h1>
+      <h1>Create Account</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
       <form onSubmit={handleSubmit}>
@@ -73,4 +73,4 @@ const AdminCreateAccount = () => {
   );
 };
 
-export default AdminCreateAccount;
+export default CreateAccount;
