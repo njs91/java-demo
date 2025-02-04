@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 // Specifies that this class is an entity and is mapped to a database table.
 @Entity
+@Table(name = "products")
 public class Product {
     // This attribute is the primary key of the entity.
     @Id

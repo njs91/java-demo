@@ -2,8 +2,9 @@ package com.example.pojo;
 
 import jakarta.persistence.*;
 
-// Specifies that this class is an entity and is mapped to a database table.
+// Specifies that this class is an entity and is mapped to a database table named "users".
 @Entity
+@Table(name = "users")
 public class User {
     // This attribute is the primary key of the entity.
     @Id
