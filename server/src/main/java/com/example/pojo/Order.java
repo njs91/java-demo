@@ -5,8 +5,9 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// Specifies that this class is an entity and is mapped to a database table.
+// Specifies that this class is an entity and is mapped to a database table named "orders".
 @Entity
+@Table(name = "orders")
 public class Order {
     // This attribute is the primary key of the entity.
     @Id
