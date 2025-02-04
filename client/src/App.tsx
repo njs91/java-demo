@@ -9,11 +9,12 @@ import UserShopping from "./pages/user/Shopping/Shopping";
 import UserBasket from "./pages/user/Basket/Basket";
 import Homepage from "./pages/Homepage/Homepage";
 import Navigation from "./components/Navigation/Navigation";
+import styles from "./style.module.scss";
 
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div className={styles.container}>
         <Navigation />
         <Routes>
           <Route path="/" element={<Homepage />} />
