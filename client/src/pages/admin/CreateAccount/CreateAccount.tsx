@@ -4,6 +4,8 @@ const AdminCreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -25,16 +27,20 @@ const AdminCreateAccount = () => {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      console.log("Admin account created:", data);
+      await response.json();
+      setSuccess("Admin account created successfully!");
+      setError("");
     } catch (error) {
-      console.error("There was an error creating the admin account!", error);
+      setError("There was an error creating the admin account!");
+      setSuccess("");
     }
   };
 
   return (
     <div>
       <h1>Create Admin Account</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
