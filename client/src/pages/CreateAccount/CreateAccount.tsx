@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./styles.module.scss";
 
 const CreateAccount = () => {
   const [username, setUsername] = useState("");
@@ -37,7 +38,7 @@ const CreateAccount = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Create Account</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
