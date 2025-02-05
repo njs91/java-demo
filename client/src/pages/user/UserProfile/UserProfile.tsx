@@ -17,6 +17,7 @@ const Profile = () => {
   return (
     <div>
       <h1>Welcome {userContext.user.username}</h1>
+      <p>Your role: {userContext.user.role}</p>
     </div>
   );
 };
