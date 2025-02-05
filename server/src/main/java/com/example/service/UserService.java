@@ -39,4 +39,14 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    // Implement login logic here, e.g., find user by username and check password
+    public User loginUser(User user) {
+        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
+            return existingUser.get();
+        } else {
+            throw new RuntimeException("Invalid username or password");
+        }
+    }
 }
