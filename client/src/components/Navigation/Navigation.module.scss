@@ -9,12 +9,21 @@
   .navList {
     list-style: none;
     display: flex;
-    justify-content: space-around;
-    margin: 0;
+    justify-content: space-between;
+    margin: 0 auto;
     padding: 0;
+    max-width: $max-content-width;
 
     .navItem {
       margin: 0;
+
+      &:first-child {
+        margin-right: auto;
+      }
+
+      &:not(:first-child) {
+        margin-left: 1em;
+      }
 
       .navLink {
         color: #fff;
