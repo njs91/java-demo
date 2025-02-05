@@ -33,10 +33,10 @@ const Login = () => {
 
       const data = await response.json();
       userContext?.setUser({ username: data.username, role: data.role });
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ username: data.username, role: data.role })
-      );
+      document.cookie = `user=${JSON.stringify({
+        username: data.username,
+        role: data.role,
+      })}; path=/; max-age=${7 * 24 * 60 * 60}`;
       setSuccess("Login successful!");
       setError("");
       navigate("/");
