@@ -39,7 +39,9 @@ const Login = () => {
       })}; path=/; max-age=${7 * 24 * 60 * 60}`;
       setSuccess("Login successful!");
       setError("");
-      navigate("/");
+      const redirectUrl =
+        data.role === "admin" ? "/admin/management" : "/user/profile";
+      navigate(redirectUrl);
     } catch (error) {
       setError("There was an error logging in!");
       setSuccess("");
@@ -75,6 +77,9 @@ const Login = () => {
       <p>
         Don't have an account?{" "}
         <Link to="/create-account">Create an account</Link>.
+      </p>
+      <p>
+        <Link to="/change-password">Reset your password</Link>.
       </p>
     </div>
   );
