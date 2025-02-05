@@ -33,6 +33,10 @@ const Login = () => {
 
       const data = await response.json();
       userContext?.setUser({ username: data.username, role: data.role });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username: data.username, role: data.role })
+      );
       setSuccess("Login successful!");
       setError("");
       navigate("/");
