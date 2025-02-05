@@ -10,6 +10,7 @@ import UserBasket from "./pages/user/Basket/Basket";
 import Homepage from "./pages/Homepage/Homepage";
 import Navigation from "./components/Navigation/Navigation";
 import styles from "./style.module.scss";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/user/create-account" element={<UserCreateAccount />} />
           <Route path="/user/shopping" element={<UserShopping />} />
           <Route path="/user/basket" element={<UserBasket />} />
+          <Route path="/change-password" element={<ChangePassword />} />
         </Routes>
       </div>
     </Router>
