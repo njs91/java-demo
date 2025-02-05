@@ -20,13 +20,12 @@ public class AuthController {
     // Endpoint to login a user.
     @PostMapping("/login")
     public User loginUser(@RequestBody User user) {
-        return userService.loginUser(user); // @todo
+        return userService.loginUser(user);
     }
 
     // Endpoint to change a user's password.
     @PutMapping("/change-password")
-    public User changePassword(@RequestBody User user) {
-        // Implement password change logic here.
-        return userService.saveUser(user);
+    public User changePassword(@RequestParam int userId, @RequestParam String newPassword) {
+        return userService.changePassword(userId, newPassword);
     }
 }

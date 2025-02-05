@@ -49,4 +49,16 @@ public class UserService {
             throw new RuntimeException("Invalid username or password");
         }
     }
+
+    // Change the user's password
+    public User changePassword(int userId, String newPassword) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPassword(newPassword);
+            return userRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
 }
