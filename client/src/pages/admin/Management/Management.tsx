@@ -27,13 +27,20 @@ const AdminManagement = () => {
   */
   return (
     <div>
-      <h1>Admin Management</h1>
-      <p>
-        Welcome {username}. Your role: {role}
-      </p>
-      <p>
-        <Link to="/change-password">Change your password</Link>.
-      </p>
+      <div>
+        <h1>Admin Management</h1>
+        <p>
+          Welcome {username}. Your role: {role}
+        </p>
+        <p>
+          <Link to="/change-password">Change your password</Link>.
+        </p>
+      </div>
+
+      <div>
+        <h2>Create a new product</h2>
+        <p>@todo</p>
+      </div>
     </div>
   );
 };
