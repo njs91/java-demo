@@ -13,6 +13,7 @@ import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import { UserProvider } from "./context/UserContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Products from "./pages/products/Products/Products";
+import UserProfile from "./pages/user/UserProfile/UserProfile";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             </Route>
             <Route element={<PrivateRoute />}>
               <Route path="/admin/management" element={<AdminManagement />} />
+              <Route path="/user/profile" element={<UserProfile />} />
               <Route
                 path="/user/create-account"
                 element={<UserCreateAccount />}
