@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
 
 const ChangePassword = () => {
   const [userId, setUserId] = useState("");
@@ -57,6 +58,9 @@ const ChangePassword = () => {
         </div>
         <button type="submit">Change Password</button>
       </form>
+      <p>
+        Back to <Link to="/login">login</Link>.
+      </p>
     </div>
   );
 };

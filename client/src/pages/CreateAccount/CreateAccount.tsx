@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
 
 const CreateAccount = () => {
   const [username, setUsername] = useState("");
@@ -70,6 +71,9 @@ const CreateAccount = () => {
         </div>
         <button type="submit">Create Account</button>
       </form>
+      <p>
+        Already have an account? <Link to="/login">Log in</Link>.
+      </p>
     </div>
   );
 };
