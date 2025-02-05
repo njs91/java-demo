@@ -2,24 +2,26 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 
-const Profile = () => {
-  const userContext = useContext(UserContext);
+const UserProfile = () => {
+  const { user } = useContext(UserContext) || {};
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userContext?.user?.role === "admin") {
+    if (user?.role === "admin") {
       navigate("/admin/management");
     }
-  }, [userContext, navigate]);
+  }, [user, navigate]);
 
-  if (!userContext?.user) return null;
+  if (!user) return null;
+
+  const { username, role } = user;
 
   return (
     <div>
-      <h1>Welcome {userContext.user.username}</h1>
-      <p>Your role: {userContext.user.role}</p>
+      <h1>Welcome {username}</h1>
+      <p>Your role: {role}</p>
     </div>
   );
 };
 
-export default Profile;
+export default UserProfile;
