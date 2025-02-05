@@ -34,7 +34,7 @@ const Navigation = () => {
     <nav className={styles.nav}>
       <div className={styles.navContainer}>
         <button className={styles.mobileMenuButton} onClick={toggleMobileMenu}>
-          ☰
+          {isMobileMenuOpen ? "✕" : "☰"}
         </button>
         <ul
           className={`${styles.navList} ${isMobileMenuOpen ? styles.open : ""}`}
