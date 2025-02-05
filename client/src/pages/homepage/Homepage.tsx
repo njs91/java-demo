@@ -4,15 +4,15 @@ import { UserContext } from "../../context/UserContext";
 import styles from "./styles.module.scss";
 
 const Homepage = () => {
-  const userContext = useContext(UserContext);
+  const { user } = useContext(UserContext) || {};
 
   return (
     <div className={styles.container}>
       <h1>Java Project Home</h1>
       <p>By Nick Smith</p>
-      {userContext?.user ? (
+      {user ? (
         <>
-          <p>Welcome {userContext.user.username}.</p>
+          <p>Welcome {user.username}.</p>
           <p>
             <Link to="/user/profile">View your profile</Link>.
           </p>
