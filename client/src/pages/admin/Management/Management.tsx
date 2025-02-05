@@ -86,9 +86,10 @@ const AdminManagement = () => {
         <h2>Create a new product</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Name:</label>
+            <label htmlFor="name">Name:</label>
             <input
               type="text"
+              id="name"
               name="name"
               value={product.name}
               onChange={handleInputChange}
@@ -96,9 +97,10 @@ const AdminManagement = () => {
             />
           </div>
           <div>
-            <label>Cost:</label>
+            <label htmlFor="cost">Cost:</label>
             <input
               type="number"
+              id="cost"
               name="cost"
               value={product.cost}
               onChange={handleInputChange}
@@ -106,9 +108,10 @@ const AdminManagement = () => {
             />
           </div>
           <div>
-            <label>Image URL:</label>
+            <label htmlFor="image">Image URL:</label>
             <input
               type="text"
+              id="image"
               name="image"
               value={product.image}
               onChange={handleInputChange}
@@ -116,9 +119,10 @@ const AdminManagement = () => {
             />
           </div>
           <div>
-            <label>Category:</label>
+            <label htmlFor="category">Category:</label>
             <input
               type="text"
+              id="category"
               name="category"
               value={product.category}
               onChange={handleInputChange}
