@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
+import styles from "./styles.module.scss";
 
 const AdminManagement = () => {
   const { user } = useContext(UserContext) || {};
@@ -17,6 +18,8 @@ const AdminManagement = () => {
     image: "",
     category: "",
   });
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (user?.role === "user") {
@@ -35,6 +38,8 @@ const AdminManagement = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setMessage(null);
+    setError(null);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/products`,
@@ -47,12 +52,12 @@ const AdminManagement = () => {
         }
       );
       if (response.ok) {
-        alert("Product created successfully");
+        setMessage("Product created successfully");
       } else {
-        console.error("There was an error creating the product!");
+        setError("There was an error creating the product!");
       }
     } catch (error) {
-      console.error("There was an error creating the product!", error);
+      setError("There was an error creating the product!");
     }
   };
 
@@ -66,8 +71,8 @@ const AdminManagement = () => {
     - search for a user
   */
   return (
-    <div>
-      <div>
+    <div className={styles.adminManagement}>
+      <div className={styles.header}>
         <h1>Admin Management</h1>
         <p>
           Welcome {username}. Your role: {role}
@@ -77,7 +82,7 @@ const AdminManagement = () => {
         </p>
       </div>
 
-      <div>
+      <div className={styles.createProduct}>
         <h2>Create a new product</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -122,6 +127,8 @@ const AdminManagement = () => {
           </div>
           <button type="submit">Create Product</button>
         </form>
+        {message && <p className={styles.successMessage}>{message}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
     </div>
   );
