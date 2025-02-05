@@ -4,10 +4,11 @@ const AdminManagement = () => {
   /*
     lists users and products
     
-    links to:
-    - create new product
-    - view a product
-
+    functionality:
+    - CRUD a product
+    - CRUD a user
+    - filter by order/cost/whatever
+    - search for a user
   */
   return (
     <div>

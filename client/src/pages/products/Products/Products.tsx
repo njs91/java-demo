@@ -1,7 +1,10 @@
 import React from "react";
 
 const Shopping = () => {
-  // lists products
+  /*
+    lists products
+    add/remove from basket
+  */
   return (
     <div>
       <h1>Shopping</h1>

@@ -12,7 +12,7 @@ import styles from "./style.module.scss";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import { UserProvider } from "./context/UserContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Products from "./pages/user/Products/Products";
+import Products from "./pages/products/Products/Products";
 
 const App = () => {
   return (
