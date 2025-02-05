@@ -12,6 +12,7 @@ import Navigation from "./components/Navigation/Navigation";
 import styles from "./style.module.scss";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import { UserProvider } from "./context/UserContext";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const App = () => {
   return (
@@ -21,16 +22,20 @@ const App = () => {
           <Navigation />
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/admin/management" element={<AdminManagement />} />
-            <Route
-              path="/user/create-account"
-              element={<UserCreateAccount />}
-            />
-            <Route path="/user/shopping" element={<UserShopping />} />
-            <Route path="/user/basket" element={<UserBasket />} />
-            <Route path="/change-password" element={<ChangePassword />} />
+            <Route element={<PrivateRoute inverse redirectPath="/" />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+            </Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/admin/management" element={<AdminManagement />} />
+              <Route
+                path="/user/create-account"
+                element={<UserCreateAccount />}
+              />
+              <Route path="/user/shopping" element={<UserShopping />} />
+              <Route path="/user/basket" element={<UserBasket />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+            </Route>
           </Routes>
         </div>
       </Router>

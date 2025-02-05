@@ -59,7 +59,7 @@ const ChangePassword = () => {
         <button type="submit">Change Password</button>
       </form>
       <p>
-        Back to <Link to="/login">login</Link>.
+        Back to <Link to="/">home</Link>.
       </p>
     </div>
   );

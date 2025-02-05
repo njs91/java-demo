@@ -11,10 +11,15 @@ const Homepage = () => {
       <h1>Java Project Home</h1>
       <p>By Nick Smith</p>
       {userContext?.user ? (
-        <p>
-          Welcome {userContext.user.username}. Account type:{" "}
-          {userContext.user.role}.
-        </p>
+        <>
+          <p>
+            Welcome {userContext.user.username}. Account type:{" "}
+            {userContext.user.role}.
+          </p>
+          <p>
+            <Link to="/change-password">Change your password</Link>.
+          </p>
+        </>
       ) : (
         <div>
           <Link to="/login">
