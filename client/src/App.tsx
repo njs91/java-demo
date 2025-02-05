@@ -12,6 +12,7 @@ import ChangePassword from "./pages/user/ChangePassword/ChangePassword";
 import { UserProvider } from "./context/UserContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Products from "./pages/products/Products/Products";
+import Product from "./pages/products/Product/Product";
 import UserProfile from "./pages/user/UserProfile/UserProfile";
 import Basket from "./pages/user/Basket/Basket";
 
@@ -24,6 +25,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:productId" element={<Product />} />
             <Route element={<PrivateRoute inverse redirectPath="/" />}>
               <Route path="/login" element={<Login />} />
               <Route path="/create-account" element={<CreateAccount />} />
