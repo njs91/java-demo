@@ -12,7 +12,13 @@ const Profile = () => {
     }
   }, [userContext, navigate]);
 
-  return <div>Profile</div>;
+  if (!userContext?.user) return null;
+
+  return (
+    <div>
+      <h1>Welcome {userContext.user.username}</h1>
+    </div>
+  );
 };
 
 export default Profile;
