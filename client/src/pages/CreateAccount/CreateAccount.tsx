@@ -26,14 +26,17 @@ const CreateAccount = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorText = await response.text();
+        throw new Error(errorText);
       }
 
       await response.json();
-      setSuccess("Admin account created successfully!");
+      setSuccess("Account created successfully!");
       setError("");
     } catch (error) {
-      setError("There was an error creating the admin account!");
+      setError(
+        (error as Error).message || "There was an error creating the account!"
+      );
       setSuccess("");
     }
   };

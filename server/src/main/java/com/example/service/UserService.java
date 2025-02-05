@@ -17,6 +17,10 @@ public class UserService {
 
     // Save a single user record.
     public User saveUser(User user) {
+        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
         return userRepository.save(user);
     }
 
