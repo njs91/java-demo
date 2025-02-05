@@ -15,6 +15,9 @@ const Navigation = () => {
   const links = userContext?.user
     ? [
         { name: "Home", url: "/" },
+        { name: "Profile", url: "/user/profile" },
+        { name: "Products", url: "/products" },
+        { name: "Basket", url: "/user/basket" },
         { name: "Logout", url: "#", onClick: handleLogout },
       ]
     : [

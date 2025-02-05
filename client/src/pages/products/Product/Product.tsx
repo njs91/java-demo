@@ -8,7 +8,6 @@ const Product = () => {
     <div>
       <h1>Product Details</h1>
       <p>Product ID: {productId}</p>
-      {/* Add more product details and functionalities here */}
     </div>
   );
 };
