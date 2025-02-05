@@ -5,15 +5,15 @@ import Login from "./pages/Login/Login";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import AdminManagement from "./pages/admin/Management/Management";
 import UserCreateAccount from "./pages/user/CreateAccount/CreateAccount";
-import UserBasket from "./pages/user/Basket/Basket";
 import Homepage from "./pages/Homepage/Homepage";
 import Navigation from "./components/Navigation/Navigation";
 import styles from "./style.module.scss";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import ChangePassword from "./pages/user/ChangePassword/ChangePassword";
 import { UserProvider } from "./context/UserContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Products from "./pages/products/Products/Products";
 import UserProfile from "./pages/user/UserProfile/UserProfile";
+import Basket from "./pages/user/Basket/Basket";
 
 const App = () => {
   return (
@@ -35,7 +35,7 @@ const App = () => {
                 path="/user/create-account"
                 element={<UserCreateAccount />}
               />
-              <Route path="/user/basket" element={<UserBasket />} />
+              <Route path="/user/basket" element={<Basket />} />
               <Route path="/change-password" element={<ChangePassword />} />
             </Route>
           </Routes>

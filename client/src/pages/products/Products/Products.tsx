@@ -1,16 +1,16 @@
 import React from "react";
 
-const Shopping = () => {
+const Products = () => {
   /*
     lists products
     add/remove from basket
   */
   return (
     <div>
-      <h1>Shopping</h1>
+      <h1>Products</h1>
       {/* Add your shopping content here */}
     </div>
   );
 };
 
-export default Shopping;
+export default Products;

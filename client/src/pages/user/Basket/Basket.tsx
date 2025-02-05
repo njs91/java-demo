@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserBasket = () => {
+const Basket = () => {
   return (
     <div>
       <h1>Basket</h1>
@@ -9,4 +9,4 @@ const UserBasket = () => {
   );
 };
 
-export default UserBasket;
+export default Basket;
