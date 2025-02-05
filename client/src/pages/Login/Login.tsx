@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { UserContext } from "../../context/UserContext";
 
@@ -9,6 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ const Login = () => {
       userContext?.setUser({ username: data.username, role: data.role });
       setSuccess("Login successful!");
       setError("");
+      navigate("/");
     } catch (error) {
       setError("There was an error logging in!");
       setSuccess("");
