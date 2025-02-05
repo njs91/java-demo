@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 
 const UserProfile = () => {
@@ -20,6 +20,9 @@ const UserProfile = () => {
     <div>
       <h1>Welcome {username}</h1>
       <p>Your role: {role}</p>
+      <p>
+        <Link to="/change-password">Change your password</Link>.
+      </p>
     </div>
   );
 };

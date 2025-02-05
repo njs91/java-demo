@@ -12,12 +12,9 @@ const Homepage = () => {
       <p>By Nick Smith</p>
       {userContext?.user ? (
         <>
+          <p>Welcome {userContext.user.username}.</p>
           <p>
-            Welcome {userContext.user.username}. Account type:{" "}
-            {userContext.user.role}.
-          </p>
-          <p>
-            <Link to="/change-password">Change your password</Link>.
+            <Link to="/user/profile">View your profile</Link>.
           </p>
         </>
       ) : (

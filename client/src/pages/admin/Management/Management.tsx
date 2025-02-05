@@ -1,16 +1,20 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 
 const AdminManagement = () => {
-  const userContext = useContext(UserContext);
+  const { user } = useContext(UserContext) || {};
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userContext?.user?.role === "user") {
+    if (user?.role === "user") {
       navigate("/user/profile");
     }
-  }, [userContext, navigate]);
+  }, [user, navigate]);
+
+  if (!user) return null;
+
+  const { username, role } = user;
 
   /*
     lists users and products
@@ -24,7 +28,12 @@ const AdminManagement = () => {
   return (
     <div>
       <h1>Admin Management</h1>
-      {/* Add your management functionalities here */}
+      <p>
+        Welcome {username}. Your role: {role}
+      </p>
+      <p>
+        <Link to="/change-password">Change your password</Link>.
+      </p>
     </div>
   );
 };
