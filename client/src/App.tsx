@@ -11,24 +11,30 @@ import Homepage from "./pages/Homepage/Homepage";
 import Navigation from "./components/Navigation/Navigation";
 import styles from "./style.module.scss";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import { UserProvider } from "./context/UserContext";
 
 const App = () => {
   return (
-    <Router>
-      <div className={styles.container}>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/admin/management" element={<AdminManagement />} />
-          <Route path="/user/create-account" element={<UserCreateAccount />} />
-          <Route path="/user/shopping" element={<UserShopping />} />
-          <Route path="/user/basket" element={<UserBasket />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-        </Routes>
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <div className={styles.container}>
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/admin/management" element={<AdminManagement />} />
+            <Route
+              path="/user/create-account"
+              element={<UserCreateAccount />}
+            />
+            <Route path="/user/shopping" element={<UserShopping />} />
+            <Route path="/user/basket" element={<UserBasket />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+          </Routes>
+        </div>
+      </Router>
+    </UserProvider>
   );
 };
 

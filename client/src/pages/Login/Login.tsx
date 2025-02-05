@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { UserContext } from "../../context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const userContext = useContext(UserContext);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -28,7 +30,8 @@ const Login = () => {
         throw new Error("Network response was not ok");
       }
 
-      await response.json();
+      const data = await response.json();
+      userContext?.setUser({ username: data.username, role: data.role });
       setSuccess("Login successful!");
       setError("");
     } catch (error) {
