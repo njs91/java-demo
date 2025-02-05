@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navigation.module.scss";
+import { UserContext } from "../../context/UserContext";
 
 const Navigation = () => {
-  const links = [
-    { name: "Home", url: "/" },
-    { name: "Login", url: "/login" },
-  ];
+  const userContext = useContext(UserContext);
+
+  const links = userContext?.user
+    ? [
+        { name: "Home", url: "/" },
+        { name: "Logout", url: "/logout" },
+      ]
+    : [
+        { name: "Home", url: "/" },
+        { name: "Login", url: "/login" },
+      ];
 
   return (
     <nav className={styles.nav}>
