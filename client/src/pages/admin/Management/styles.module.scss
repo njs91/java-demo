@@ -1,16 +1,13 @@
 @import '../../../css/variables.module.scss';
 
 .adminManagement {
-  .header {
-    // Add your styles for the header here
-  }
-
   .createProduct {
-    // Add your styles for the create product section here
+    border: $border-grey;
+    padding: 2em;
+    background-color: $white;
+    margin-bottom: 2em;
 
     form {
-      // Add your styles for the form here
-
       div {
         margin-bottom: 1em;
 

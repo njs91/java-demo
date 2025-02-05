@@ -10,6 +10,7 @@ const CreateProduct = () => {
   });
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,59 +42,70 @@ const CreateProduct = () => {
     }
   };
 
+  const toggleFormVisibility = () => {
+    setShowForm(!showForm);
+  };
+
   return (
-    <div className={styles.createProduct}>
-      <h2>Create a new product</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={product.name}
-            onChange={handleInputChange}
-            required
-          />
+    <>
+      <button onClick={toggleFormVisibility}>
+        {showForm ? "Hide" : "+ New Product"}
+      </button>
+      {showForm && (
+        <div className={styles.createProduct}>
+          <h2>Create a New Product</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={product.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="cost">Cost:</label>
+              <input
+                type="number"
+                id="cost"
+                name="cost"
+                value={product.cost}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="image">Image URL:</label>
+              <input
+                type="text"
+                id="image"
+                name="image"
+                value={product.image}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="category">Category:</label>
+              <input
+                type="text"
+                id="category"
+                name="category"
+                value={product.category}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <button type="submit">Create Product</button>
+          </form>
+          {message && <p className={styles.successMessage}>{message}</p>}
+          {error && <p className={styles.errorMessage}>{error}</p>}
         </div>
-        <div>
-          <label htmlFor="cost">Cost:</label>
-          <input
-            type="number"
-            id="cost"
-            name="cost"
-            value={product.cost}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Image URL:</label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={product.image}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit">Create Product</button>
-      </form>
-      {message && <p className={styles.successMessage}>{message}</p>}
-      {error && <p className={styles.errorMessage}>{error}</p>}
-    </div>
+      )}
+    </>
   );
 };
 
