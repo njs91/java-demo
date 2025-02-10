@@ -86,7 +86,7 @@
       }
 
       button {
-        background-color: $red;
+        background-color: $primary;
         color: white;
         border: none;
         border-radius: 4px;
@@ -95,7 +95,59 @@
         margin-top: 0.5em;
 
         &:hover {
-          background-color: darken($red, 10%);
+          background-color: $primary-light;
+        }
+
+        &:not(:last-child) {
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+
+  .editProduct {
+    margin-top: 2em;
+    padding: 2em;
+    background-color: $white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    form {
+      div {
+        margin-bottom: 1em;
+
+        label {
+          display: block;
+          margin-bottom: 0.5em;
+        }
+
+        input {
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+      }
+
+      button {
+        background-color: $primary;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 0.5em 1em;
+        margin-top: 0.5em;
+
+        &:hover {
+          background-color: $primary-light;
+        }
+
+        &:not(:last-child) {
+          margin-right: 0.5em;
         }
       }
     }

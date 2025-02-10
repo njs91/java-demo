@@ -38,6 +38,22 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    // Endpoint to update a product by its ID.
+    @PutMapping("/{id}")
+    public Product updateProductById(@PathVariable int id, @RequestBody Product product) {
+        Optional<Product> existingProduct = productService.getProductById(id);
+        if (existingProduct.isPresent()) {
+            Product updatedProduct = existingProduct.get();
+            updatedProduct.setName(product.getName());
+            updatedProduct.setCost(product.getCost());
+            updatedProduct.setImage(product.getImage());
+            updatedProduct.setCategory(product.getCategory());
+            return productService.saveProduct(updatedProduct);
+        } else {
+            throw new RuntimeException("Product not found");
+        }
+    }
+
     // Endpoint to delete a product by its ID.
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable int id, @RequestParam String username) {
