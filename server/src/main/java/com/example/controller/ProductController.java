@@ -40,17 +40,23 @@ public class ProductController {
 
     // Endpoint to update a product by its ID.
     @PutMapping("/{id}")
-    public Product updateProductById(@PathVariable int id, @RequestBody Product product) {
-        Optional<Product> existingProduct = productService.getProductById(id);
-        if (existingProduct.isPresent()) {
-            Product updatedProduct = existingProduct.get();
-            updatedProduct.setName(product.getName());
-            updatedProduct.setCost(product.getCost());
-            updatedProduct.setImage(product.getImage());
-            updatedProduct.setCategory(product.getCategory());
-            return productService.saveProduct(updatedProduct);
+    public Product updateProductById(@PathVariable int id, @RequestBody Product product,
+            @RequestParam String username) {
+        Optional<User> user = userService.getUserByUsername(username);
+        if (user.isPresent() && "admin".equals(user.get().getRole())) {
+            Optional<Product> existingProduct = productService.getProductById(id);
+            if (existingProduct.isPresent()) {
+                Product updatedProduct = existingProduct.get();
+                updatedProduct.setName(product.getName());
+                updatedProduct.setCost(product.getCost());
+                updatedProduct.setImage(product.getImage());
+                updatedProduct.setCategory(product.getCategory());
+                return productService.saveProduct(updatedProduct);
+            } else {
+                throw new RuntimeException("Product not found");
+            }
         } else {
-            throw new RuntimeException("Product not found");
+            throw new RuntimeException("Unauthorized action");
         }
     }
 

@@ -82,7 +82,7 @@ const AdminManagement = () => {
   const handleUpdate = async (updatedProduct: Product) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.productId}`,
+        `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.productId}?username=${user?.username}`,
         {
           method: "PUT",
           headers: {
