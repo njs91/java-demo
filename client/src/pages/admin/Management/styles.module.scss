@@ -1,6 +1,10 @@
 @import '../../../css/variables.module.scss';
 
 .adminManagement {
+  .header {
+    // Add your styles for the header here
+  }
+
   .createProduct {
     border: $border-grey;
     padding: 2em;
@@ -45,5 +49,51 @@
       color: red;
       margin-top: 1em;
     }
+  }
+
+  .productList {
+    margin-top: 2em;
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1em;
+    }
+
+    li {
+      background-color: $white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      p {
+        margin: 0.5em 0;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 0.5em;
+      }
+    }
+  }
+
+  .successMessage {
+    color: green;
+    margin-top: 1em;
+  }
+
+  .errorMessage {
+    color: red;
+    margin-top: 1em;
   }
 }
