@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import CreateProduct from "./CreateProduct";
 import ProductList from "./ProductList";
+import EditProduct from "./EditProduct";
 import styles from "./styles.module.scss";
 
 /*
@@ -134,81 +135,11 @@ const AdminManagement = () => {
       />
 
       {editingProduct && (
-        <div className={styles.editProduct}>
-          <h2>Edit Product</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleUpdate(editingProduct);
-            }}
-          >
-            <div>
-              <label htmlFor="editName">Name:</label>
-              <input
-                type="text"
-                id="editName"
-                name="name"
-                value={editingProduct.name}
-                onChange={(e) =>
-                  setEditingProduct({ ...editingProduct, name: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="editCost">Cost:</label>
-              <input
-                type="number"
-                id="editCost"
-                name="cost"
-                value={editingProduct.cost}
-                onChange={(e) =>
-                  setEditingProduct({
-                    ...editingProduct,
-                    cost: parseFloat(e.target.value),
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="editImage">Image URL:</label>
-              <input
-                type="text"
-                id="editImage"
-                name="image"
-                value={editingProduct.image}
-                onChange={(e) =>
-                  setEditingProduct({
-                    ...editingProduct,
-                    image: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="editCategory">Category:</label>
-              <input
-                type="text"
-                id="editCategory"
-                name="category"
-                value={editingProduct.category}
-                onChange={(e) =>
-                  setEditingProduct({
-                    ...editingProduct,
-                    category: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-            <button type="submit">Update Product</button>
-            <button type="button" onClick={() => setEditingProduct(null)}>
-              Cancel
-            </button>
-          </form>
-        </div>
+        <EditProduct
+          product={editingProduct}
+          handleUpdate={handleUpdate}
+          handleCancel={() => setEditingProduct(null)}
+        />
       )}
     </div>
   );
