@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import CreateProduct from "./CreateProduct";
+import ProductList from "./ProductList";
 import styles from "./styles.module.scss";
 
 /*
@@ -126,27 +127,11 @@ const AdminManagement = () => {
 
       <CreateProduct />
 
-      <div className={styles.productList}>
-        <h2>Product List</h2>
-        <ul>
-          {products.map(({ productId, name, cost, category, image }) => (
-            <li key={productId}>
-              <p>Name: {name}</p>
-              <p>Cost: {cost}</p>
-              <p>Category: {category}</p>
-              <img src={image} alt={name} />
-              <button
-                onClick={() =>
-                  handleEdit({ productId, name, cost, category, image })
-                }
-              >
-                Edit
-              </button>
-              <button onClick={() => handleDelete(productId)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ProductList
+        products={products}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
 
       {editingProduct && (
         <div className={styles.editProduct}>
