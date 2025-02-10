@@ -10,7 +10,6 @@ import styles from "./styles.module.scss";
     functionality:
     - CRUD a product:
       - create nearly done - needs image upload
-      - need read
       - need update
       - need delete
     - CRUD a user:
@@ -57,6 +56,26 @@ const AdminManagement = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (productId: number) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/products/${productId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        setProducts(
+          products.filter((product) => product.productId !== productId)
+        );
+      } else {
+        console.error("There was an error deleting the product!");
+      }
+    } catch (error) {
+      console.error("There was an error deleting the product!", error);
+    }
+  };
+
   if (!user) return null;
 
   const { username, role } = user;
@@ -84,6 +103,7 @@ const AdminManagement = () => {
               <p>Cost: {cost}</p>
               <p>Category: {category}</p>
               <img src={image} alt={name} />
+              <button onClick={() => handleDelete(productId)}>Delete</button>
             </li>
           ))}
         </ul>
