@@ -11,7 +11,6 @@ import styles from "./styles.module.scss";
     - CRUD a product:
       - create nearly done - needs image upload
       - need update
-      - need delete
     - CRUD a user:
       - need create
       - need read
@@ -59,7 +58,7 @@ const AdminManagement = () => {
   const handleDelete = async (productId: number) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/products/${productId}`,
+        `${process.env.REACT_APP_SERVER_URL}/products/${productId}?username=${user?.username}`,
         {
           method: "DELETE",
         }

@@ -1,7 +1,9 @@
 package com.example.controller;
 
 import com.example.pojo.Product;
+import com.example.pojo.User;
 import com.example.service.ProductService;
+import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserService userService;
 
     // Endpoint to create a new product.
     @PostMapping
@@ -35,7 +40,12 @@ public class ProductController {
 
     // Endpoint to delete a product by its ID.
     @DeleteMapping("/{id}")
-    public void deleteProductById(@PathVariable int id) {
-        productService.deleteProductById(id);
+    public void deleteProductById(@PathVariable int id, @RequestParam String username) {
+        Optional<User> user = userService.getUserByUsername(username);
+        if (user.isPresent() && "admin".equals(user.get().getRole())) {
+            productService.deleteProductById(id);
+        } else {
+            throw new RuntimeException("Unauthorized action");
+        }
     }
 }
