@@ -36,7 +36,12 @@ public class UserController {
 
     // Endpoint to delete a user by their ID.
     @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable int id) {
-        userService.deleteUserById(id);
+    public void deleteUserById(@PathVariable int id, @RequestParam String username) {
+        Optional<User> requestingUser = userService.getUserByUsername(username);
+        if (requestingUser.isPresent() && "admin".equals(requestingUser.get().getRole())) {
+            userService.deleteUserById(id);
+        } else {
+            throw new RuntimeException("Only admin users can delete users");
+        }
     }
 }

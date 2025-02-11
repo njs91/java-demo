@@ -14,7 +14,6 @@ import styles from "./styles.module.scss";
       - create nearly done - needs image upload
     - CRUD a user:
       - need create
-      - need read
       - need update
       - need delete
     - filter by order/cost/whatever
@@ -96,7 +95,7 @@ const AdminManagement = () => {
   const handleDeleteUser = async (id: number) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}?username=${user?.username}`,
         {
           method: "DELETE",
         }
