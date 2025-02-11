@@ -1,26 +1,24 @@
 package com.example.controller;
 
-import com.example.pojo.Product;
+import com.example.pojo.Cart;
+import com.example.pojo.CartItem;
+import com.example.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/carts")
 public class CartController {
-    private List<Product> cart = new ArrayList<>();
+    @Autowired
+    private CartService cartService;
 
-    // Endpoint to add a product to the cart.
-    @PostMapping("/add")
-    public List<Product> addProductToCart(@RequestBody Product product) {
-        cart.add(product);
-        return cart;
+    @PostMapping
+    public Cart createCart(@RequestParam int userId) {
+        return cartService.createCart(userId);
     }
 
-    // Endpoint to view the cart.
-    @GetMapping
-    public List<Product> viewCart() {
-        return cart;
+    @PostMapping("/{cartId}/items")
+    public CartItem addItemToCart(@PathVariable int cartId, @RequestParam int productId, @RequestParam int quantity) {
+        return cartService.addItemToCart(cartId, productId, quantity);
     }
 }
