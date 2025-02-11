@@ -15,7 +15,6 @@ import EditUser from "./EditUser";
       - create nearly done - needs image upload
     - CRUD a user:
       - need create
-      - need update
     - filter by order/cost/whatever
     - search for a user
   */
