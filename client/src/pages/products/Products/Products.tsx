@@ -11,6 +11,7 @@ interface Product {
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,7 +29,15 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  console.log("products: ", products);
+  const addToCart = (product: Product) => {
+    setCart([...cart, product]);
+  };
+
+  const isInCart = (productId: number) => {
+    return cart.some((product) => product.productId === productId);
+  };
+
+  console.log("cart", cart);
 
   return (
     <div className={styles.products}>
@@ -40,7 +49,15 @@ const Products = () => {
             <h2>{product.name}</h2>
             <p>Category: {product.category}</p>
             <p>Cost: ${product.cost.toFixed(2)}</p>
-            <button>Add to Basket</button>
+            <button
+              onClick={() => addToCart(product)}
+              disabled={isInCart(product.productId)}
+              className={
+                isInCart(product.productId) ? styles.disabledButton : ""
+              }
+            >
+              {isInCart(product.productId) ? "In Cart" : "Add to Basket"}
+            </button>
           </div>
         ))}
       </div>
