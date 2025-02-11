@@ -5,6 +5,7 @@ import CreateProduct from "./CreateProduct";
 import ProductList from "./ProductList";
 import EditProduct from "./EditProduct";
 import styles from "./styles.module.scss";
+import EditUser from "./EditUser";
 
 /*
     lists users and products
@@ -35,6 +36,7 @@ const AdminManagement = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (user?.role === "user") {
@@ -117,11 +119,11 @@ const AdminManagement = () => {
     }
   };
 
-  const handleEdit = (product: Product) => {
+  const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
   };
 
-  const handleUpdate = async (updatedProduct: Product) => {
+  const handleUpdateProduct = async (updatedProduct: Product) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.productId}?username=${user?.username}`,
@@ -150,6 +152,42 @@ const AdminManagement = () => {
     }
   };
 
+  const handleEditUser = (user: User) => {
+    setEditingUser(user);
+  };
+
+  const handleUpdateUser = async (updatedUser: User, newPassword: string) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/users/${updatedUser.userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: user?.username,
+            updatedUsername: updatedUser.username,
+            newPassword,
+            role: updatedUser.role,
+          }),
+        }
+      );
+      if (response.ok) {
+        setUsers(
+          users.map((user) =>
+            user.userId === updatedUser.userId ? updatedUser : user
+          )
+        );
+        setEditingUser(null);
+      } else {
+        console.error("There was an error updating the user!");
+      }
+    } catch (error) {
+      console.error("There was an error updating the user!", error);
+    }
+  };
+
   if (!user) return null;
 
   const { username, role } = user;
@@ -170,14 +208,14 @@ const AdminManagement = () => {
 
       <ProductList
         products={products}
-        handleEdit={handleEdit}
+        handleEdit={handleEditProduct}
         handleDelete={handleDeleteProduct}
       />
 
       {editingProduct && (
         <EditProduct
           product={editingProduct}
-          handleUpdate={handleUpdate}
+          handleUpdate={handleUpdateProduct}
           handleCancel={() => setEditingProduct(null)}
         />
       )}
@@ -190,6 +228,7 @@ const AdminManagement = () => {
               <p>ID: {user.userId}</p>
               <p>Username: {user.username}</p>
               <p>Role: {user.role}</p>
+              <button onClick={() => handleEditUser(user)}>Edit</button>
               <button onClick={() => handleDeleteUser(user.userId)}>
                 Delete
               </button>
@@ -197,6 +236,14 @@ const AdminManagement = () => {
           ))}
         </ul>
       </div>
+
+      {editingUser && (
+        <EditUser
+          user={editingUser}
+          handleUpdate={handleUpdateUser}
+          handleCancel={() => setEditingUser(null)}
+        />
+      )}
     </div>
   );
 };

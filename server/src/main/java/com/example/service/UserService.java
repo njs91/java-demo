@@ -70,4 +70,18 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
     }
+
+    // Update a user
+    public User updateUser(int id, User updatedUser) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setUsername(updatedUser.getUsername());
+            user.setPassword(updatedUser.getPassword());
+            user.setRole(updatedUser.getRole());
+            return userRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
 }
