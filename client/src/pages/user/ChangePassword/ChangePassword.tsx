@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../context/UserContext";
 
 const ChangePassword = () => {
-  const [userId, setUserId] = useState("");
+  const { user } = useContext(UserContext) || {};
+  const [userId, setUserId] = useState(user?.userId || "");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.userId);
+    }
+  }, [user]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,6 +53,7 @@ const ChangePassword = () => {
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
             required
+            readOnly
           />
         </div>
         <div>
