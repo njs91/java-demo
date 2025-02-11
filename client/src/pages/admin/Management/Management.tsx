@@ -95,9 +95,13 @@ const AdminManagement = () => {
   const handleDeleteUser = async (id: number) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/users/${id}?username=${user?.username}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: user?.username }),
         }
       );
       if (response.ok) {

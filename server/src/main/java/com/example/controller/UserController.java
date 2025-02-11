@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 // This annotation tells Spring that this class is a REST controller.
@@ -36,7 +37,8 @@ public class UserController {
 
     // Endpoint to delete a user by their ID.
     @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable int id, @RequestParam String username) {
+    public void deleteUserById(@PathVariable int id, @RequestBody Map<String, String> requestBody) {
+        String username = requestBody.get("username");
         Optional<User> requestingUser = userService.getUserByUsername(username);
         if (requestingUser.isPresent() && "admin".equals(requestingUser.get().getRole())) {
             userService.deleteUserById(id);
