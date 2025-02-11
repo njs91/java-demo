@@ -33,7 +33,7 @@ const Login = () => {
 
       const data = await response.json();
       const userData = {
-        userId: data.userId,
+        id: data.id,
         username: data.username,
         role: data.role,
       };

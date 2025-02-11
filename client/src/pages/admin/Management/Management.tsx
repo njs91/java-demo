@@ -119,8 +119,8 @@ const AdminManagement = () => {
         }
       );
       if (response.ok) {
-        setUsers(users.filter((user) => user.userId !== id));
-        if (user?.userId === id && setUser) {
+        setUsers(users.filter((user) => user.id !== id));
+        if (user?.id === id && setUser) {
           setUser(null);
           navigate("/login");
         }
@@ -172,7 +172,7 @@ const AdminManagement = () => {
   const handleUpdateUser = async (updatedUser: User, newPassword: string) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/users/${updatedUser.userId}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/${updatedUser.id}`,
         {
           method: "PUT",
           headers: {
@@ -188,9 +188,7 @@ const AdminManagement = () => {
       );
       if (response.ok) {
         setUsers(
-          users.map((user) =>
-            user.userId === updatedUser.userId ? updatedUser : user
-          )
+          users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
         );
         setEditingUser(null);
       } else {
@@ -249,14 +247,12 @@ const AdminManagement = () => {
         )}
         <ul>
           {(searchResult || users).map((user) => (
-            <li key={user.userId?.toString()}>
-              <p>ID: {user.userId}</p>
+            <li key={user.id?.toString()}>
+              <p>ID: {user.id}</p>
               <p>Username: {user.username}</p>
               <p>Role: {user.role}</p>
               <button onClick={() => handleEditUser(user)}>Edit</button>
-              <button onClick={() => handleDeleteUser(user.userId)}>
-                Delete
-              </button>
+              <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
             </li>
           ))}
         </ul>

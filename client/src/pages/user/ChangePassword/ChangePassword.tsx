@@ -5,14 +5,14 @@ import { UserContext } from "../../../context/UserContext";
 
 const ChangePassword = () => {
   const { user } = useContext(UserContext) || {};
-  const [userId, setUserId] = useState(user?.userId || "");
+  const [userId, setUserId] = useState(user?.id || "");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (user) {
-      setUserId(user.userId);
+      setUserId(user.id);
     }
   }, [user]);
 

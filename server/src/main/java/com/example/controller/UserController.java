@@ -60,7 +60,7 @@ public class UserController {
         Optional<User> requestingUser = userService.getUserByUsername(username);
         if (requestingUser.isPresent() && "admin".equals(requestingUser.get().getRole())) {
             User updatedUser = new User();
-            updatedUser.setUserId(id);
+            updatedUser.setId(id);
             updatedUser.setUsername((String) requestBody.get("updatedUsername"));
             updatedUser.setPassword((String) requestBody.get("newPassword"));
             updatedUser.setRole((String) requestBody.get("role"));
