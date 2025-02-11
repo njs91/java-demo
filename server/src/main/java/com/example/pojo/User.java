@@ -9,7 +9,7 @@ public class User {
     // This attribute is the primary key of the entity.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
 
     // Username of the user.
     private String username;
@@ -31,13 +31,13 @@ public class User {
         this.role = role;
     }
 
-    // Getter and setter methods for userId.
-    public int getUserId() {
-        return userId;
+    // Getter and setter methods for id.
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Getter and setter methods for username.

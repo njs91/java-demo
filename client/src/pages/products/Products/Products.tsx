@@ -29,8 +29,33 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const addToCart = (product: Product) => {
-    setCart([...cart, product]);
+  const addToCart = async (product: Product) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/carts/1/items`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: product.productId,
+            quantity: 1,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setCart([...cart, product]);
+      } else {
+        console.error("Failed to add product to cart");
+      }
+    } catch (error) {
+      console.error(
+        "There was an error adding the product to the cart!",
+        error
+      );
+    }
   };
 
   const isInCart = (productId: number) => {

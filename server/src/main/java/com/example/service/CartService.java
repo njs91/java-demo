@@ -41,14 +41,32 @@ public class CartService {
     public CartItem addItemToCart(int cartId, int productId, int quantity) {
         Optional<Cart> cartOptional = cartRepository.findById(cartId);
         Optional<Product> productOptional = productRepository.findById(productId);
-        if (cartOptional.isPresent() && productOptional.isPresent()) {
-            CartItem cartItem = new CartItem();
-            cartItem.setCart(cartOptional.get());
-            cartItem.setProduct(productOptional.get());
-            cartItem.setQuantity(quantity);
-            return cartItemRepository.save(cartItem);
+
+        if (!cartOptional.isPresent()) {
+            throw new RuntimeException("Cart not found");
+        }
+
+        if (!productOptional.isPresent()) {
+            throw new RuntimeException("Product not found");
+        }
+
+        Cart cart = cartOptional.get();
+        Product product = productOptional.get();
+
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
+        cartItem.setQuantity(quantity);
+
+        return cartItemRepository.save(cartItem);
+    }
+
+    public Cart getOrCreateCart(int userId) {
+        Optional<Cart> cartOptional = cartRepository.findByUserId(userId);
+        if (cartOptional.isPresent()) {
+            return cartOptional.get();
         } else {
-            throw new RuntimeException("Cart or Product not found");
+            return createCart(userId);
         }
     }
 }
