@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const userContext = useContext(UserContext);
+  const { setUser } = useContext(UserContext) || {};
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -32,11 +32,16 @@ const Login = () => {
       }
 
       const data = await response.json();
-      userContext?.setUser({ username: data.username, role: data.role });
-      document.cookie = `user=${JSON.stringify({
+      const userData = {
+        id: data.userId,
         username: data.username,
         role: data.role,
-      })}; path=/; max-age=${7 * 24 * 60 * 60}`;
+      };
+      console.log("userData:", userData);
+      setUser?.(userData);
+      document.cookie = `user=${encodeURIComponent(
+        JSON.stringify(userData)
+      )}; path=/; max-age=${7 * 24 * 60 * 60}`;
       setSuccess("Login successful!");
       setError("");
       const redirectUrl =
