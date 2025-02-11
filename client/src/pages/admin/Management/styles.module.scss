@@ -105,6 +105,35 @@
     }
   }
 
+  .userList {
+    margin-top: 2em;
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1em;
+    }
+
+    li {
+      background-color: $white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      p {
+        margin: 0.5em 0;
+      }
+    }
+  }
+
   .editProduct {
     margin-top: 2em;
     padding: 2em;
