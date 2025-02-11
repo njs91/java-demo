@@ -71,7 +71,7 @@ const AdminManagement = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = async (productId: number) => {
+  const handleDeleteProduct = async (productId: number) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/products/${productId}?username=${user?.username}`,
@@ -88,6 +88,24 @@ const AdminManagement = () => {
       }
     } catch (error) {
       console.error("There was an error deleting the product!", error);
+    }
+  };
+
+  const handleDeleteUser = async (id: number) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        setUsers(users.filter((user) => user.userId !== id));
+      } else {
+        console.error("There was an error deleting the user!");
+      }
+    } catch (error) {
+      console.error("There was an error deleting the user!", error);
     }
   };
 
@@ -145,7 +163,7 @@ const AdminManagement = () => {
       <ProductList
         products={products}
         handleEdit={handleEdit}
-        handleDelete={handleDelete}
+        handleDelete={handleDeleteProduct}
       />
 
       {editingProduct && (
@@ -160,9 +178,13 @@ const AdminManagement = () => {
         <h2>All Users</h2>
         <ul>
           {users.map((user) => (
-            <li key={user.username}>
+            <li key={user.userId?.toString()}>
+              <p>ID: {user.userId}</p>
               <p>Username: {user.username}</p>
               <p>Role: {user.role}</p>
+              <button onClick={() => handleDeleteUser(user.userId)}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>

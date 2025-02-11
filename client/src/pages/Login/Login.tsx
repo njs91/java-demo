@@ -33,11 +33,10 @@ const Login = () => {
 
       const data = await response.json();
       const userData = {
-        id: data.userId,
+        userId: data.userId,
         username: data.username,
         role: data.role,
       };
-      console.log("userData:", userData);
       setUser?.(userData);
       document.cookie = `user=${encodeURIComponent(
         JSON.stringify(userData)
