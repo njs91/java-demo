@@ -37,6 +37,7 @@ const AdminManagement = () => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState<User[] | null>(null);
 
   useEffect(() => {
     if (user?.role === "user") {
@@ -80,7 +81,7 @@ const AdminManagement = () => {
         `${process.env.REACT_APP_SERVER_URL}/users/search?username=${searchQuery}`
       );
       const data = await response.json();
-      setUsers(data);
+      setSearchResult(data);
     } catch (error) {
       console.error("There was an error searching for users!", error);
     }
@@ -240,12 +241,15 @@ const AdminManagement = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by username"
+            placeholder="Enter username"
           />
           <button type="submit">Search</button>
         </form>
+        {searchResult !== null && searchResult.length === 0 && (
+          <p>No users found</p>
+        )}
         <ul>
-          {users.map((user) => (
+          {(searchResult || users).map((user) => (
             <li key={user.userId?.toString()}>
               <p>ID: {user.userId}</p>
               <p>Username: {user.username}</p>
