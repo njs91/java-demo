@@ -36,6 +36,7 @@ const AdminManagement = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (user?.role === "user") {
@@ -71,6 +72,19 @@ const AdminManagement = () => {
     fetchProducts();
     fetchUsers();
   }, []);
+
+  const handleSearch = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/users/search?username=${searchQuery}`
+      );
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("There was an error searching for users!", error);
+    }
+  };
 
   const handleDeleteProduct = async (productId: number) => {
     try {
@@ -221,6 +235,15 @@ const AdminManagement = () => {
 
       <div className={styles.userList}>
         <h2>All Users</h2>
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by username"
+          />
+          <button type="submit">Search</button>
+        </form>
         <ul>
           {users.map((user) => (
             <li key={user.userId?.toString()}>

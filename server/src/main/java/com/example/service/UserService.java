@@ -39,6 +39,11 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    // Search users by username.
+    public List<User> searchUsersByUsername(String username) {
+        return userRepository.findByUsernameContainingIgnoreCase(username);
+    }
+
     // Delete a user by their ID.
     public void deleteUserById(int id) {
         userRepository.deleteById(id);

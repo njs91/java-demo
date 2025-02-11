@@ -35,6 +35,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    // Endpoint to search users by username.
+    @GetMapping("/search")
+    public List<User> searchUsers(@RequestParam String username) {
+        return userService.searchUsersByUsername(username);
+    }
+
     // Endpoint to delete a user by their ID.
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable int id, @RequestBody Map<String, String> requestBody) {
