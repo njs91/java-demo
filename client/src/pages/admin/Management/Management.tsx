@@ -15,7 +15,6 @@ import styles from "./styles.module.scss";
     - CRUD a user:
       - need create
       - need update
-      - need delete
     - filter by order/cost/whatever
     - search for a user
   */
