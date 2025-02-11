@@ -9,6 +9,11 @@ interface Product {
   category: string;
 }
 
+/*
+  @todo:
+  - bugs: users can add to cart, refresh page, and then the add to cart button is not disabled for products already in the cart
+*/
+
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
