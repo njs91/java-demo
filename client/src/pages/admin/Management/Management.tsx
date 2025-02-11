@@ -16,7 +16,6 @@ import EditUser from "./EditUser";
     - CRUD a user:
       - need create
     - filter by order/cost/whatever
-    - search for a user
   */
 
 interface Product {
