@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../../context/UserContext";
+import { User, UserContext } from "../../../context/UserContext";
 import CreateProduct from "./CreateProduct";
 import ProductList from "./ProductList";
 import EditProduct from "./EditProduct";
@@ -33,6 +33,7 @@ const AdminManagement = () => {
   const { user } = useContext(UserContext) || {};
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -54,7 +55,20 @@ const AdminManagement = () => {
       }
     };
 
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/users`
+        );
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("There was an error fetching the users!", error);
+      }
+    };
+
     fetchProducts();
+    fetchUsers();
   }, []);
 
   const handleDelete = async (productId: number) => {
@@ -141,6 +155,18 @@ const AdminManagement = () => {
           handleCancel={() => setEditingProduct(null)}
         />
       )}
+
+      <div className={styles.userList}>
+        <h2>All Users</h2>
+        <ul>
+          {users.map((user) => (
+            <li key={user.username}>
+              <p>Username: {user.username}</p>
+              <p>Role: {user.role}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
