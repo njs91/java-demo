@@ -69,4 +69,22 @@ public class UserController {
             throw new RuntimeException("Only admin users can update users");
         }
     }
+
+    // Endpoint to register a new user.
+    @PostMapping("/register")
+    public User registerUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
+
+    // Endpoint to login a user.
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) {
+        return userService.loginUser(user);
+    }
+
+    // Endpoint to change a user's password.
+    @PutMapping("/change-password")
+    public User changePassword(@RequestParam int userId, @RequestParam String newPassword) {
+        return userService.changePassword(userId, newPassword);
+    }
 }

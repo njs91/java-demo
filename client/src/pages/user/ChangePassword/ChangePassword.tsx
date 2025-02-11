@@ -21,7 +21,7 @@ const ChangePassword = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/auth/change-password?userId=${userId}&newPassword=${newPassword}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/change-password?userId=${userId}&newPassword=${newPassword}`,
         {
           method: "PUT",
         }
