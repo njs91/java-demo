@@ -23,6 +23,18 @@ public class Product {
     // Category of the product.
     private String category;
 
+    // Default constructor
+    public Product() {
+    }
+
+    // Constructor with parameters
+    public Product(String name, double cost, String image, String category) {
+        this.name = name;
+        this.cost = cost;
+        this.image = image;
+        this.category = category;
+    }
+
     // Getter and setter methods for productId.
     public int getProductId() {
         return productId;

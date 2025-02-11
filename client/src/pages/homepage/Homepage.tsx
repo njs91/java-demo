@@ -6,6 +6,26 @@ import styles from "./styles.module.scss";
 const Homepage = () => {
   const { user } = useContext(UserContext) || {};
 
+  const handleAddTestData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/test-data/add`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      alert("Test data added successfully!");
+    } catch (error) {
+      console.error("There was an error adding test data!", error);
+      alert("There was an error adding test data!");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <h1>Java Project Home</h1>
@@ -27,6 +47,7 @@ const Homepage = () => {
           </Link>
         </div>
       )}
+      <button onClick={handleAddTestData}>Add Test Data</button>
     </div>
   );
 };

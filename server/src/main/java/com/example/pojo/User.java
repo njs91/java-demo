@@ -20,6 +20,17 @@ public class User {
     // Role of the user (e.g., admin or user).
     private String role;
 
+    // Default constructor
+    public User() {
+    }
+
+    // Constructor with parameters
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     // Getter and setter methods for userId.
     public int getUserId() {
         return userId;
