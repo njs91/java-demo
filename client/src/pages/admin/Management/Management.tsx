@@ -30,7 +30,9 @@ interface Product {
 }
 
 const AdminManagement = () => {
-  const { user } = useContext(UserContext) || {};
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+  const setUser = userContext?.setUser;
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [users, setUsers] = useState<User[]>([]);
@@ -101,6 +103,10 @@ const AdminManagement = () => {
       );
       if (response.ok) {
         setUsers(users.filter((user) => user.userId !== id));
+        if (user?.userId === id && setUser) {
+          setUser(null);
+          navigate("/login");
+        }
       } else {
         console.error("There was an error deleting the user!");
       }
