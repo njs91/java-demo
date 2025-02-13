@@ -17,21 +17,21 @@ public class Product {
     // Cost of the product.
     private double cost;
 
-    // Image URL of the product.
-    private String image;
-
     // Category of the product.
     private String category;
+
+    @Lob
+    private byte[] imageData;
 
     // Default constructor
     public Product() {
     }
 
     // Constructor with parameters
-    public Product(String name, double cost, String image, String category) {
+    public Product(String name, double cost, byte[] imageData, String category) {
         this.name = name;
         this.cost = cost;
-        this.image = image;
+        this.imageData = imageData;
         this.category = category;
     }
 
@@ -62,15 +62,6 @@ public class Product {
         this.cost = cost;
     }
 
-    // Getter and setter methods for image.
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     // Getter and setter methods for category.
     public String getCategory() {
         return category;
@@ -78,5 +69,13 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }

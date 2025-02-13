@@ -6,7 +6,9 @@ import com.example.service.ProductService;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +23,14 @@ public class ProductController {
     private UserService userService;
 
     // Endpoint to create a new product.
-    @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+    @PostMapping(consumes = { "multipart/form-data" })
+    public Product createProduct(@RequestPart("product") Product product,
+            @RequestPart("imageFile") MultipartFile imageFile) {
+        try {
+            return productService.saveProduct(product, imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save product", e);
+        }
     }
 
     // Endpoint to get a product by its ID.
@@ -49,7 +56,7 @@ public class ProductController {
                 Product updatedProduct = existingProduct.get();
                 updatedProduct.setName(product.getName());
                 updatedProduct.setCost(product.getCost());
-                updatedProduct.setImage(product.getImage());
+                updatedProduct.setImageData(product.getImageData());
                 updatedProduct.setCategory(product.getCategory());
                 return productService.saveProduct(updatedProduct);
             } else {

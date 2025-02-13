@@ -5,12 +5,12 @@ const CreateProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     cost: 0,
-    image: "",
     category: "",
   });
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,15 +21,20 @@ const CreateProduct = () => {
     e.preventDefault();
     setMessage(null);
     setError(null);
+    const formData = new FormData();
+    formData.append(
+      "product",
+      new Blob([JSON.stringify(product)], { type: "application/json" })
+    );
+    if (imageFile) {
+      formData.append("imageFile", imageFile);
+    }
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/products`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(product),
+          body: formData,
         }
       );
       if (response.ok) {
@@ -78,13 +83,12 @@ const CreateProduct = () => {
               />
             </div>
             <div>
-              <label htmlFor="image">Image URL:</label>
+              <label htmlFor="image">Image:</label>
               <input
-                type="text"
+                type="file"
                 id="image"
                 name="image"
-                value={product.image}
-                onChange={handleInputChange}
+                onChange={(e) => setImageFile(e.target.files?.[0] || null)}
                 required
               />
             </div>

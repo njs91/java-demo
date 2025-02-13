@@ -4,7 +4,9 @@ import com.example.pojo.Product;
 import com.example.util.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,10 @@ public class ProductService {
     private ProductRepository productRepository;
 
     // Save a single product record.
-    public Product saveProduct(Product product) {
+    public Product saveProduct(Product product, MultipartFile imageFile) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            product.setImageData(imageFile.getBytes());
+        }
         return productRepository.save(product);
     }
 
