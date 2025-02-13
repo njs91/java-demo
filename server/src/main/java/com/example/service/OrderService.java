@@ -61,4 +61,9 @@ public class OrderService {
         }
         return orderRepository.save(order);
     }
+
+    // Filter orders by date range
+    public List<Order> getOrdersByDateRange(LocalDate startDate, LocalDate endDate) {
+        return orderRepository.findByOrderDateBetween(startDate, endDate);
+    }
 }

@@ -5,6 +5,7 @@ import com.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,9 +41,11 @@ public class OrderController {
         orderService.deleteOrderById(id);
     }
 
-    // Endpoint to create an order from a cart
-    @PostMapping("/from-cart/{userId}")
-    public Order createOrderFromCart(@PathVariable int userId) {
-        return orderService.createOrderFromCart(userId);
+    // Endpoint to filter orders by date range
+    @GetMapping("/filter-by-date")
+    public List<Order> getOrdersByDateRange(@RequestParam String startDate, @RequestParam String endDate) {
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        return orderService.getOrdersByDateRange(start, end);
     }
 }

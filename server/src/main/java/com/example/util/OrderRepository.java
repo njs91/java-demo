@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // Specifies that this interface is a repository and will be used to perform CRUD operations on Order entities.
@@ -13,6 +14,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     // Custom query method to get orders by user ID
     @Query("SELECT o FROM Order o WHERE o.user.id = ?1")
     List<Order> findByUserId(int userId);
+
+    // Custom query method to filter orders by date range
+    @Query("SELECT o FROM Order o WHERE o.orderDate BETWEEN ?1 AND ?2")
+    List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
 }
 
 // example of old one with custom SQL:
