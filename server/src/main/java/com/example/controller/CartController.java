@@ -20,10 +20,15 @@ public class CartController {
     }
 
     @PostMapping("/{cartId}/items")
-    public CartItem addItemToCart(@PathVariable int cartId, @RequestBody Map<String, Integer> request) {
+    public CartItem addItemToCart(@PathVariable int userId, @RequestBody Map<String, Integer> request) {
         int productId = request.get("productId");
         int quantity = request.get("quantity");
-        Cart cart = cartService.getOrCreateCart(cartId);
+        Cart cart = cartService.getOrCreateCart(userId);
         return cartService.addItemToCart(cart.getId(), productId, quantity);
+    }
+
+    @GetMapping("/{userId}")
+    public Cart getCartByUserId(@PathVariable int userId) {
+        return cartService.getOrCreateCart(userId);
     }
 }

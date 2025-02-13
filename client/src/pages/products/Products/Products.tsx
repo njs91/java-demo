@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { UserContext } from "../../../context/UserContext";
 
 interface Product {
   productId: number;
@@ -15,6 +16,7 @@ interface Product {
 */
 
 const Products = () => {
+  const { user } = useContext(UserContext) || {};
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
 
@@ -35,9 +37,14 @@ const Products = () => {
   }, []);
 
   const addToCart = async (product: Product) => {
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
+
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/carts/1/items`,
+        `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}/items`,
         {
           method: "POST",
           headers: {

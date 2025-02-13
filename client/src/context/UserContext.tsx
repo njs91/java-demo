@@ -11,9 +11,7 @@ interface UserContextType {
   setUser: (user: User | null) => void;
 }
 
-export const UserContext = createContext<UserContextType | undefined>(
-  undefined
-);
+export const UserContext = createContext<UserContextType | null>(null);
 
 const getCookie = (name: string) => {
   const value = `; ${document.cookie}`;

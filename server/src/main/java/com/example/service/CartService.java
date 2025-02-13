@@ -62,7 +62,7 @@ public class CartService {
     }
 
     public Cart getOrCreateCart(int userId) {
-        Optional<Cart> cartOptional = cartRepository.findByUser_Id(userId);
+        Optional<Cart> cartOptional = cartRepository.findByUserId(userId);
         if (cartOptional.isPresent()) {
             return cartOptional.get();
         } else {
