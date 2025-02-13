@@ -1,0 +1,25 @@
+.basket {
+  padding: 20px;
+
+  .cartItems {
+    display: flex;
+    flex-direction: column;
+
+    .cartItem {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      img {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
