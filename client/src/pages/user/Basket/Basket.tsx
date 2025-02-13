@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 import styles from "./styles.module.scss";
 
-interface CartItem {
-  id: number;
-  product: {
-    productId: number;
-    name: string;
-    cost: number;
-    image: string;
-  };
-  quantity: number;
-}
+// interface CartItem {
+//   id: number;
+//   product: {
+//     productId: number;
+//     name: string;
+//     cost: number;
+//     image: string;
+//   };
+//   quantity: number;
+// }
 
 const Basket = () => {
   const { user } = useContext(UserContext) || {};

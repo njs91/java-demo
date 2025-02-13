@@ -52,6 +52,8 @@ const AdminManagement = () => {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState<User[] | null>(null);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     if (user?.role === "user") {
@@ -227,6 +229,19 @@ const AdminManagement = () => {
     }
   };
 
+  const handleFilterOrders = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/orders/filter-by-date?startDate=${startDate}&endDate=${endDate}`
+      );
+      const data = await response.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("There was an error filtering the orders!", error);
+    }
+  };
+
   if (!user) return null;
 
   const { username, role } = user;
@@ -296,6 +311,25 @@ const AdminManagement = () => {
 
       <div className={styles.orderList}>
         <h2>All Orders</h2>
+        <form onSubmit={handleFilterOrders}>
+          <label>
+            Start Date:
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </label>
+          <label>
+            End Date:
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </label>
+          <button type="submit">Filter</button>
+        </form>
         <ul>
           {orders.map((order) => (
             <li key={order.orderId}>
