@@ -6,6 +6,7 @@ import com.example.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,14 +18,6 @@ public class CartController {
     @PostMapping
     public Cart createCart(@RequestParam int userId) {
         return cartService.createCart(userId);
-    }
-
-    @PostMapping("/{userId}/items")
-    public CartItem addItemToCart(@PathVariable int userId, @RequestBody Map<String, Integer> request) {
-        int productId = request.get("productId");
-        int quantity = request.get("quantity");
-        Cart cart = cartService.getOrCreateCart(userId);
-        return cartService.addItemToCart(cart.getId(), productId, quantity);
     }
 
     @PostMapping("/add")
@@ -39,5 +32,10 @@ public class CartController {
     @GetMapping("/{userId}")
     public Cart getCartByUserId(@PathVariable int userId) {
         return cartService.getOrCreateCart(userId);
+    }
+
+    @GetMapping("/{cartId}/items")
+    public List<CartItem> getCartItems(@PathVariable int cartId) {
+        return cartService.getCartItems(cartId);
     }
 }

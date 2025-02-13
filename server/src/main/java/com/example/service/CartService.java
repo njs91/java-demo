@@ -11,6 +11,7 @@ import com.example.util.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,5 +69,9 @@ public class CartService {
         } else {
             return createCart(userId);
         }
+    }
+
+    public List<CartItem> getCartItems(int cartId) {
+        return cartItemRepository.findByCartId(cartId);
     }
 }
