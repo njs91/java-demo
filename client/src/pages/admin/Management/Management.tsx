@@ -13,17 +13,14 @@ import EditUser from "./EditUser";
     functionality:
     - CRUD a product:
       - create nearly done - needs image upload
-    - CRUD a user:
-      - need create
-    - filter by order/cost/whatever
   */
 
 interface Product {
   productId: number;
   name: string;
   cost: number;
-  image: string;
   category: string;
+  imageData: string; // Ensure imageData is included in the Product interface
 }
 
 interface Order {

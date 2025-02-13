@@ -5,13 +5,13 @@ interface Product {
   productId: number;
   name: string;
   cost: number;
-  image: string;
   category: string;
+  imageData: string; // Ensure imageData is included in the Product interface
 }
 
 interface EditProductProps {
   product: Product;
-  handleUpdate: (updatedProduct: Product) => void;
+  handleUpdate: (updatedProduct: Product) => Promise<void>; // Update to handle asynchronous function
   handleCancel: () => void;
 }
 
@@ -26,9 +26,9 @@ const EditProduct: React.FC<EditProductProps> = ({
     <div className={styles.editProduct}>
       <h2>Edit Product</h2>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          handleUpdate(editingProduct);
+          await handleUpdate(editingProduct); // Handle asynchronous function
         }}
       >
         <div>
@@ -55,22 +55,6 @@ const EditProduct: React.FC<EditProductProps> = ({
               setEditingProduct({
                 ...editingProduct,
                 cost: parseFloat(e.target.value),
-              })
-            }
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="editImage">Image URL:</label>
-          <input
-            type="text"
-            id="editImage"
-            name="image"
-            value={editingProduct.image}
-            onChange={(e) =>
-              setEditingProduct({
-                ...editingProduct,
-                image: e.target.value,
               })
             }
             required

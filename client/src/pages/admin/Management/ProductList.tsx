@@ -5,8 +5,8 @@ interface Product {
   productId: number;
   name: string;
   cost: number;
-  image: string;
   category: string;
+  imageData: string; // Ensure imageData is included in the Product interface
 }
 
 interface ProductListProps {
@@ -24,15 +24,21 @@ const ProductList: React.FC<ProductListProps> = ({
     <div className={styles.productList}>
       <h2>Product List</h2>
       <ul>
-        {products.map(({ productId, name, cost, category, image }) => (
+        {products.map(({ productId, name, cost, category, imageData }) => (
           <li key={productId}>
             <p>Name: {name}</p>
             <p>Cost: {cost}</p>
             <p>Category: {category}</p>
-            <img src={image} alt={name} />
+            {imageData && (
+              <img
+                src={`data:image/jpeg;base64,${imageData}`}
+                alt={name}
+                className={styles.productImage}
+              />
+            )}
             <button
               onClick={() =>
-                handleEdit({ productId, name, cost, category, image })
+                handleEdit({ productId, name, cost, category, imageData })
               }
             >
               Edit
