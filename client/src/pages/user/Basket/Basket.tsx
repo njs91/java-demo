@@ -15,26 +15,26 @@ interface CartItem {
 
 const Basket = () => {
   const { user } = useContext(UserContext) || {};
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      if (user) {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}`
-          );
-          const data = await response.json();
-          console.log("data:", data);
-          setCartItems(data.items);
-        } catch (error) {
-          console.error("There was an error fetching the cart!", error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     if (user) {
+  //       try {
+  //         const response = await fetch(
+  //           `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}`
+  //         );
+  //         const data = await response.json();
+  //         console.log("data:", data);
+  //         setCartItems(data.items);
+  //       } catch (error) {
+  //         console.error("There was an error fetching the cart!", error);
+  //       }
+  //     }
+  //   };
 
-    fetchCart();
-  }, [user]);
+  //   fetchCart();
+  // }, [user]);
 
   const placeOrder = async () => {
     if (user) {
@@ -57,7 +57,7 @@ const Basket = () => {
   return (
     <div className={styles.basket}>
       <h1>Basket</h1>
-      <div className={styles.cartItems}>
+      {/* <div className={styles.cartItems}>
         {cartItems?.map((item) => (
           <div key={item.id} className={styles.cartItem}>
             <img src={item.product.image} alt={item.product.name} />
@@ -68,7 +68,7 @@ const Basket = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       <button onClick={placeOrder} className={styles.placeOrderButton}>
         Place Order
       </button>

@@ -26,6 +26,20 @@ interface Product {
   category: string;
 }
 
+interface Order {
+  orderId: number;
+  user: {
+    id: number;
+    username: string;
+  };
+  product: {
+    productId: number;
+    name: string;
+  };
+  quantity: number;
+  orderDate: string;
+}
+
 const AdminManagement = () => {
   const userContext = useContext(UserContext);
   const user = userContext?.user;
@@ -33,6 +47,7 @@ const AdminManagement = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,8 +84,21 @@ const AdminManagement = () => {
       }
     };
 
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/orders`
+        );
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error("There was an error fetching the orders!", error);
+      }
+    };
+
     fetchProducts();
     fetchUsers();
+    fetchOrders();
   }, []);
 
   const handleSearch = async (event: React.FormEvent) => {
@@ -265,6 +293,21 @@ const AdminManagement = () => {
           handleCancel={() => setEditingUser(null)}
         />
       )}
+
+      <div className={styles.orderList}>
+        <h2>All Orders</h2>
+        <ul>
+          {orders.map((order) => (
+            <li key={order.orderId}>
+              <p>Order ID: {order.orderId}</p>
+              <p>User: {order.user.username}</p>
+              <p>Product: {order.product.name}</p>
+              <p>Quantity: {order.quantity}</p>
+              <p>Order Date: {order.orderDate}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

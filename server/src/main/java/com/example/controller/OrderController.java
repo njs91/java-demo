@@ -48,4 +48,10 @@ public class OrderController {
         LocalDate end = LocalDate.parse(endDate);
         return orderService.getOrdersByDateRange(start, end);
     }
+
+    // Endpoint to create an order from a cart
+    @PostMapping("/from-cart/{userId}")
+    public Order createOrderFromCart(@PathVariable int userId) {
+        return orderService.createOrderFromCart(userId);
+    }
 }
