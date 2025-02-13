@@ -36,7 +36,23 @@ const Basket = () => {
     fetchCart();
   }, [user]);
 
-  console.log("cartItems:", cartItems);
+  const placeOrder = async () => {
+    if (user) {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/orders/from-cart/${user.id}`,
+          { method: "POST" }
+        );
+        if (response.ok) {
+          alert("Order placed successfully!");
+        } else {
+          alert("Failed to place order.");
+        }
+      } catch (error) {
+        console.error("There was an error placing the order!", error);
+      }
+    }
+  };
 
   return (
     <div className={styles.basket}>
@@ -53,6 +69,9 @@ const Basket = () => {
           </div>
         ))}
       </div>
+      <button onClick={placeOrder} className={styles.placeOrderButton}>
+        Place Order
+      </button>
     </div>
   );
 };

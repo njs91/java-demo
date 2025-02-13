@@ -39,4 +39,10 @@ public class OrderController {
     public void deleteOrderById(@PathVariable int id) {
         orderService.deleteOrderById(id);
     }
+
+    // Endpoint to create an order from a cart
+    @PostMapping("/from-cart/{userId}")
+    public Order createOrderFromCart(@PathVariable int userId) {
+        return orderService.createOrderFromCart(userId);
+    }
 }
