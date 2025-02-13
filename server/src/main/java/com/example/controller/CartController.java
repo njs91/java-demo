@@ -19,8 +19,17 @@ public class CartController {
         return cartService.createCart(userId);
     }
 
-    @PostMapping("/{cartId}/items")
+    @PostMapping("/{userId}/items")
     public CartItem addItemToCart(@PathVariable int userId, @RequestBody Map<String, Integer> request) {
+        int productId = request.get("productId");
+        int quantity = request.get("quantity");
+        Cart cart = cartService.getOrCreateCart(userId);
+        return cartService.addItemToCart(cart.getId(), productId, quantity);
+    }
+
+    @PostMapping("/add")
+    public CartItem addItemToCart(@RequestBody Map<String, Integer> request) {
+        int userId = request.get("userId");
         int productId = request.get("productId");
         int quantity = request.get("quantity");
         Cart cart = cartService.getOrCreateCart(userId);

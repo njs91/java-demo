@@ -44,13 +44,14 @@ const Products = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}/items`,
+        `${process.env.REACT_APP_SERVER_URL}/carts/add`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            userId: user.id,
             productId: product.productId,
             quantity: 1,
           }),
