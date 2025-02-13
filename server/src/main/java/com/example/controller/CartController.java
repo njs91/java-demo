@@ -34,6 +34,11 @@ public class CartController {
         return cartService.getOrCreateCart(userId);
     }
 
+    @GetMapping("/user/{userId}/cart-id")
+    public int getCartIdByUserId(@PathVariable int userId) {
+        return cartService.getCartIdByUserId(userId);
+    }
+
     @GetMapping("/{cartId}/items")
     public List<CartItem> getCartItems(@PathVariable int cartId) {
         return cartService.getCartItems(cartId);

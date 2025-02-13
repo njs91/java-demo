@@ -71,6 +71,15 @@ public class CartService {
         }
     }
 
+    public int getCartIdByUserId(int userId) {
+        Optional<Cart> cartOptional = cartRepository.findByUserId(userId);
+        if (cartOptional.isPresent()) {
+            return cartOptional.get().getId();
+        } else {
+            throw new RuntimeException("Cart not found for user ID: " + userId);
+        }
+    }
+
     public List<CartItem> getCartItems(int cartId) {
         return cartItemRepository.findByCartId(cartId);
     }
