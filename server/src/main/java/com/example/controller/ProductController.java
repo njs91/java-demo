@@ -47,7 +47,8 @@ public class ProductController {
 
     // Endpoint to update a product by its ID.
     @PutMapping("/{id}")
-    public Product updateProductById(@PathVariable int id, @RequestBody Product product,
+    public Product updateProductById(@PathVariable int id, @RequestPart("product") Product product,
+            @RequestPart("imageFile") MultipartFile imageFile,
             @RequestParam String username) {
         Optional<User> user = userService.getUserByUsername(username);
         if (user.isPresent() && "admin".equals(user.get().getRole())) {
@@ -56,9 +57,12 @@ public class ProductController {
                 Product updatedProduct = existingProduct.get();
                 updatedProduct.setName(product.getName());
                 updatedProduct.setCost(product.getCost());
-                updatedProduct.setImageData(product.getImageData());
                 updatedProduct.setCategory(product.getCategory());
-                return productService.saveProduct(updatedProduct);
+                try {
+                    return productService.saveProduct(updatedProduct, imageFile);
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to update product", e);
+                }
             } else {
                 throw new RuntimeException("Product not found");
             }
