@@ -48,7 +48,7 @@ public class ProductController {
     // Endpoint to update a product by its ID.
     @PutMapping("/{id}")
     public Product updateProductById(@PathVariable int id, @RequestPart("product") Product product,
-            @RequestPart("imageFile") MultipartFile imageFile,
+            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile,
             @RequestParam String username) {
         Optional<User> user = userService.getUserByUsername(username);
         if (user.isPresent() && "admin".equals(user.get().getRole())) {

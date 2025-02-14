@@ -165,14 +165,20 @@ const AdminManagement = () => {
 
   const handleUpdateProduct = async (updatedProduct: Product) => {
     try {
+      const formData = new FormData();
+      formData.append("product", JSON.stringify(updatedProduct));
+      if (updatedProduct.imageData) {
+        const imageFile = new Blob([updatedProduct.imageData], {
+          type: "image/jpeg",
+        });
+        formData.append("imageFile", imageFile);
+      }
+
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.productId}?username=${user?.username}`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedProduct),
+          body: formData,
         }
       );
       if (response.ok) {
