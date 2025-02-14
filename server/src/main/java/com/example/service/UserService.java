@@ -2,8 +2,10 @@ package com.example.service;
 
 import com.example.pojo.User;
 import com.example.util.UserRepository;
+import com.example.util.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +16,9 @@ public class UserService {
     // Automatically inject the UserRepository object to interact with the database.
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     // Save a single user record.
     public User saveUser(User user) {
@@ -45,7 +50,9 @@ public class UserService {
     }
 
     // Delete a user by their ID.
+    @Transactional
     public void deleteUserById(int id) {
+        cartRepository.deleteByUserId(id); // Delete all carts associated with the user
         userRepository.deleteById(id);
     }
 
