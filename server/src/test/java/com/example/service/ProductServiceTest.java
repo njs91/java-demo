@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.pojo.Product;
 import com.example.util.ProductRepository;
+import com.example.util.CartItemRepository;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,9 @@ public class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
+
+    @Mock
+    private CartItemRepository cartItemRepository;
 
     @Mock
     private MultipartFile imageFile;
@@ -71,10 +75,12 @@ public class ProductServiceTest {
 
     @Test
     public void testDeleteProductById() {
+        doNothing().when(cartItemRepository).deleteByProductId(anyInt());
         doNothing().when(productRepository).deleteById(anyInt());
 
         productService.deleteProductById(1);
 
+        verify(cartItemRepository, times(1)).deleteByProductId(anyInt());
         verify(productRepository, times(1)).deleteById(anyInt());
     }
 
