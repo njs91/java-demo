@@ -111,7 +111,7 @@ Unit tests are provided to ensure the functionality of the application. The test
 ### How to Run the Tests
 
 Navigate to the server directory and run the following command to run the test with Maven:
-    ```sh
+    ```
     mvn test
     ```
 
