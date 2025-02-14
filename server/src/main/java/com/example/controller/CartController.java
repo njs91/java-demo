@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.pojo.Cart;
 import com.example.pojo.CartItem;
 import com.example.service.CartService;
+import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,9 @@ import java.util.Map;
 public class CartController {
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     public Cart createCart(@RequestParam int userId) {
@@ -51,5 +55,14 @@ public class CartController {
     @GetMapping("/{cartId}/items")
     public List<CartItem> getCartItems(@PathVariable int cartId) {
         return cartService.getCartItems(cartId);
+    }
+
+    @GetMapping("/user/{userId}/items")
+    public List<CartItem> getCartItemsByUserId(@PathVariable int userId) {
+        if (!userService.getUserById(userId).isPresent()) {
+            throw new RuntimeException("User not found");
+        }
+        Cart cart = cartService.getOrCreateCart(userId);
+        return cartService.getCartItems(cart.getId());
     }
 }

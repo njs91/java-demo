@@ -30,10 +30,11 @@ const Products = () => {
       if (!user) return;
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}/items`
+          `${process.env.REACT_APP_SERVER_URL}/carts/user/${user.id}/items`
         );
         const data = await response.json();
-        setCart(data.map((item: any) => item.product)); // Assuming the response contains cart items with a product field
+        console.log("data: ", data);
+        setCart(data.map((item: any) => item.product));
       } catch (error) {
         console.error("There was an error fetching the cart items!", error);
       }
@@ -79,8 +80,10 @@ const Products = () => {
   };
 
   const isInCart = (productId: number) => {
-    return cart.some((product) => product.id === productId); // Ensure the correct key is used
+    return cart.some((product) => product?.id === productId);
   };
+
+  console.log("cart: ", cart);
 
   return (
     <div className={styles.products}>
