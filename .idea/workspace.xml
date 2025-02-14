@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c6915aa-aedb-43a4-8f3d-25d0fcc49c32" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/admin/Management/EditProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/admin/Management/EditProduct.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/admin/Management/Management.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/admin/Management/Management.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/admin/Management/ProductList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/admin/Management/ProductList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/controller/TestDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/controller/TestDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/pojo/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/pojo/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/pojo/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/pojo/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/example/util/CartItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/example/util/CartItemRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -41,8 +41,8 @@ public class TestDataController {
 
             // Create cart for user "c" and add products 1 and 3
             Cart cart = cartService.getOrCreateCart(userC.getId());
-            cartService.addItemToCart(cart.getId(), product1.getProductId(), 1);
-            cartService.addItemToCart(cart.getId(), product3.getProductId(), 1);
+            cartService.addItemToCart(cart.getId(), product1.getId(), 1);
+            cartService.addItemToCart(cart.getId(), product3.getId(), 1);
         } catch (IOException e) {
             throw new RuntimeException("Failed to add test data", e);
         }

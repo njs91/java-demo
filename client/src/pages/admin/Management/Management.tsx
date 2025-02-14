@@ -16,7 +16,7 @@ import EditUser from "./EditUser";
   */
 
 interface Product {
-  productId: number;
+  id: number;
   name: string;
   cost: number;
   category: string;
@@ -30,7 +30,7 @@ interface Order {
     username: string;
   };
   product: {
-    productId: number;
+    id: number;
     name: string;
   };
   quantity: number;
@@ -113,18 +113,20 @@ const AdminManagement = () => {
     }
   };
 
-  const handleDeleteProduct = async (productId: number) => {
+  const handleDeleteProduct = async (id: number) => {
+    if (!id) {
+      console.error("Invalid product ID");
+      return;
+    }
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/products/${productId}?username=${user?.username}`,
+        `${process.env.REACT_APP_SERVER_URL}/products/${id}?username=${user?.username}`,
         {
           method: "DELETE",
         }
       );
       if (response.ok) {
-        setProducts(
-          products.filter((product) => product.productId !== productId)
-        );
+        setProducts(products.filter((product) => product.id !== id));
       } else {
         console.error("There was an error deleting the product!");
       }
@@ -164,6 +166,10 @@ const AdminManagement = () => {
   };
 
   const handleUpdateProduct = async (updatedProduct: Product) => {
+    if (!updatedProduct.id) {
+      console.error("Invalid product ID");
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("product", JSON.stringify(updatedProduct));
@@ -175,7 +181,7 @@ const AdminManagement = () => {
       }
 
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.productId}?username=${user?.username}`,
+        `${process.env.REACT_APP_SERVER_URL}/products/${updatedProduct.id}?username=${user?.username}`,
         {
           method: "PUT",
           body: formData,
@@ -184,9 +190,7 @@ const AdminManagement = () => {
       if (response.ok) {
         setProducts(
           products.map((product) =>
-            product.productId === updatedProduct.productId
-              ? updatedProduct
-              : product
+            product.id === updatedProduct.id ? updatedProduct : product
           )
         );
         setEditingProduct(null);

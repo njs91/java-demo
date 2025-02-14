@@ -2,9 +2,11 @@ package com.example.service;
 
 import com.example.pojo.Product;
 import com.example.util.ProductRepository;
+import com.example.util.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +19,9 @@ public class ProductService {
     // database.
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     // Save a single product record.
     public Product saveProduct(Product product, MultipartFile imageFile) throws IOException {
@@ -36,8 +41,9 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    // Delete a product by its ID.
+    @Transactional
     public void deleteProductById(int id) {
+        cartItemRepository.deleteByProductId(id); // Delete all cart items associated with the product
         productRepository.deleteById(id);
     }
 

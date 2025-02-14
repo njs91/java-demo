@@ -50,6 +50,9 @@ public class ProductController {
     public Product updateProductById(@PathVariable int id, @RequestPart("product") Product product,
             @RequestPart(value = "imageFile", required = false) MultipartFile imageFile,
             @RequestParam String username) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid product ID");
+        }
         Optional<User> user = userService.getUserByUsername(username);
         if (user.isPresent() && "admin".equals(user.get().getRole())) {
             Optional<Product> existingProduct = productService.getProductById(id);
@@ -74,6 +77,9 @@ public class ProductController {
     // Endpoint to delete a product by its ID.
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable int id, @RequestParam String username) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid product ID");
+        }
         Optional<User> user = userService.getUserByUsername(username);
         if (user.isPresent() && "admin".equals(user.get().getRole())) {
             productService.deleteProductById(id);

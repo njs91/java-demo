@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-interface Product {
-  productId: number;
+export interface Product {
+  id: number;
   name: string;
   cost: number;
   category: string;
@@ -12,7 +12,7 @@ interface Product {
 interface ProductListProps {
   products: Product[];
   handleEdit: (product: Product) => void;
-  handleDelete: (productId: number) => void;
+  handleDelete: (id: number) => void;
 }
 
 const ProductList: React.FC<ProductListProps> = ({
@@ -20,12 +20,13 @@ const ProductList: React.FC<ProductListProps> = ({
   handleEdit,
   handleDelete,
 }) => {
+  console.log("products: ", products);
   return (
     <div className={styles.productList}>
       <h2>Product List</h2>
       <ul>
-        {products.map(({ productId, name, cost, category, imageData }) => (
-          <li key={productId}>
+        {products.map(({ id, name, cost, category, imageData }) => (
+          <li key={id}>
             <p>Name: {name}</p>
             <p>Cost: {cost}</p>
             <p>Category: {category}</p>
@@ -38,12 +39,12 @@ const ProductList: React.FC<ProductListProps> = ({
             )}
             <button
               onClick={() =>
-                handleEdit({ productId, name, cost, category, imageData })
+                handleEdit({ id, name, cost, category, imageData })
               }
             >
               Edit
             </button>
-            <button onClick={() => handleDelete(productId)}>Delete</button>
+            <button onClick={() => handleDelete(id)}>Delete</button>
           </li>
         ))}
       </ul>

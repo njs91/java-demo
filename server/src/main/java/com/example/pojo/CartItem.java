@@ -3,7 +3,7 @@ package com.example.pojo;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cart_items", uniqueConstraints = @UniqueConstraint(columnNames = { "cart_id", "product_id" }))
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,9 @@ public class CartItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false)
     private int quantity;
 
+    // Getter and setter methods for id, cart, product, and quantity.
     public int getId() {
         return id;
     }

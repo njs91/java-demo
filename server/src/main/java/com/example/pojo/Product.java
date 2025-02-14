@@ -9,7 +9,7 @@ public class Product {
     // This attribute is the primary key of the entity.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private int id; // Changed from productId to id
 
     // Name of the product.
     private String name;
@@ -35,13 +35,13 @@ public class Product {
         this.category = category;
     }
 
-    // Getter and setter methods for productId.
-    public int getProductId() {
-        return productId;
+    // Getter and setter methods for id.
+    public int getId() {
+        return id;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Getter and setter methods for name.

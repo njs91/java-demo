@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-
-interface Product {
-  productId: number;
-  name: string;
-  cost: number;
-  category: string;
-  imageData: string; // Ensure imageData is included in the Product interface
-}
+import { Product } from "./ProductList";
 
 interface EditProductProps {
   product: Product;
