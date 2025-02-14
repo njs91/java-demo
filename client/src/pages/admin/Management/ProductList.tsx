@@ -6,7 +6,7 @@ interface Product {
   name: string;
   cost: number;
   category: string;
-  imageData: string; // Ensure imageData is included in the Product interface
+  imageData: string;
 }
 
 interface ProductListProps {

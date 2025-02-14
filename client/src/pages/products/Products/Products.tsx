@@ -6,7 +6,7 @@ interface Product {
   productId: number;
   name: string;
   cost: number;
-  image: string;
+  imageData: string;
   category: string;
 }
 
@@ -75,15 +75,19 @@ const Products = () => {
     return cart.some((product) => product.productId === productId);
   };
 
-  console.log("cart", cart);
-
   return (
     <div className={styles.products}>
       <h1>Products</h1>
       <div className={styles.productList}>
         {products.map((product) => (
           <div key={product.productId} className={styles.productCard}>
-            <img src={product.image} alt={product.name} />
+            {product.imageData && (
+              <img
+                src={`data:image/jpeg;base64,${product.imageData}`}
+                alt={product.name}
+                className={styles.productImage}
+              />
+            )}
             <h2>{product.name}</h2>
             <p>Category: {product.category}</p>
             <p>Cost: ${product.cost.toFixed(2)}</p>
