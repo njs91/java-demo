@@ -26,8 +26,22 @@ const Products = () => {
       }
     };
 
+    const fetchCartItems = async () => {
+      if (!user) return;
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/carts/${user.id}/items`
+        );
+        const data = await response.json();
+        setCart(data.map((item: any) => item.product)); // Assuming the response contains cart items with a product field
+      } catch (error) {
+        console.error("There was an error fetching the cart items!", error);
+      }
+    };
+
     fetchProducts();
-  }, []);
+    fetchCartItems();
+  }, [user]);
 
   const addToCart = async (product: Product) => {
     if (!user) {
@@ -45,7 +59,7 @@ const Products = () => {
           },
           body: JSON.stringify({
             userId: user.id,
-            productId: product.id, // Ensure the correct key is used
+            productId: product.id,
             quantity: 1,
           }),
         }

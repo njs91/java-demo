@@ -54,12 +54,18 @@ public class CartService {
         Cart cart = cartOptional.get();
         Product product = productOptional.get();
 
-        CartItem cartItem = new CartItem();
-        cartItem.setCart(cart);
-        cartItem.setProduct(product);
-        cartItem.setQuantity(quantity);
-
-        return cartItemRepository.save(cartItem);
+        Optional<CartItem> existingCartItem = cartItemRepository.findByCartIdAndProductId(cartId, productId);
+        if (existingCartItem.isPresent()) {
+            CartItem cartItem = existingCartItem.get();
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            return cartItemRepository.save(cartItem);
+        } else {
+            CartItem cartItem = new CartItem();
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(quantity);
+            return cartItemRepository.save(cartItem);
+        }
     }
 
     public Cart getOrCreateCart(int userId) {
