@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { UserContext } from "../../../context/UserContext";
-
-interface Product {
-  productId: number;
-  name: string;
-  cost: number;
-  imageData: string;
-  category: string;
-}
+import { Product } from "../../admin/Management/ProductList";
 
 /*
   @todo:
@@ -52,7 +45,7 @@ const Products = () => {
           },
           body: JSON.stringify({
             userId: user.id,
-            productId: product.productId,
+            productId: product.id, // Ensure the correct key is used
             quantity: 1,
           }),
         }
@@ -72,7 +65,7 @@ const Products = () => {
   };
 
   const isInCart = (productId: number) => {
-    return cart.some((product) => product.productId === productId);
+    return cart.some((product) => product.id === productId); // Ensure the correct key is used
   };
 
   return (
@@ -80,7 +73,7 @@ const Products = () => {
       <h1>Products</h1>
       <div className={styles.productList}>
         {products.map((product) => (
-          <div key={product.productId} className={styles.productCard}>
+          <div key={product.id} className={styles.productCard}>
             {product.imageData && (
               <img
                 src={`data:image/jpeg;base64,${product.imageData}`}
@@ -93,12 +86,10 @@ const Products = () => {
             <p>Cost: ${product.cost.toFixed(2)}</p>
             <button
               onClick={() => addToCart(product)}
-              disabled={isInCart(product.productId)}
-              className={
-                isInCart(product.productId) ? styles.disabledButton : ""
-              }
+              disabled={isInCart(product.id)}
+              className={isInCart(product.id) ? styles.disabledButton : ""}
             >
-              {isInCart(product.productId) ? "In Cart" : "Add to Basket"}
+              {isInCart(product.id) ? "In Cart" : "Add to Basket"}
             </button>
           </div>
         ))}

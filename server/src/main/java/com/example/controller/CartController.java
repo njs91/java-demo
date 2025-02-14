@@ -21,10 +21,19 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public CartItem addItemToCart(@RequestBody Map<String, Integer> request) {
-        int userId = request.get("userId");
-        int productId = request.get("productId");
-        int quantity = request.get("quantity");
+    public CartItem addItemToCart(@RequestBody Map<String, Object> request) {
+        if (!request.containsKey("userId") || !request.containsKey("productId") || !request.containsKey("quantity")) {
+            throw new IllegalArgumentException("Missing required parameters");
+        }
+
+        Integer userId = (Integer) request.get("userId");
+        Integer productId = (Integer) request.get("productId");
+        Integer quantity = (Integer) request.get("quantity");
+
+        if (userId == null || productId == null || quantity == null) {
+            throw new IllegalArgumentException("Invalid parameter values");
+        }
+
         Cart cart = cartService.getOrCreateCart(userId);
         return cartService.addItemToCart(cart.getId(), productId, quantity);
     }
