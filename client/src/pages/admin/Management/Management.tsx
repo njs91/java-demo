@@ -172,7 +172,10 @@ const AdminManagement = () => {
     }
     try {
       const formData = new FormData();
-      formData.append("product", JSON.stringify(updatedProduct));
+      formData.append(
+        "product",
+        new Blob([JSON.stringify(updatedProduct)], { type: "application/json" })
+      );
       if (updatedProduct.imageData) {
         const imageFile = new Blob([updatedProduct.imageData], {
           type: "image/jpeg",
