@@ -106,45 +106,11 @@ The project follows the **MVC (Model-View-Controller)** architecture:
 ## Running Tests
 
 ### Unit Tests
-Unit tests are provided to ensure the functionality of the application. The tests are located in the `server/src/test/java/com/example/service/UserServiceTest.java` file.
+Unit tests are provided to ensure the functionality of the application. The tests are located in the respective `server/src/test/java/com/example/service` files.
 
 ### How to Run the Tests
 
-1. **Ensure Dependencies are Included**: Make sure your `pom.xml` file includes the necessary JUnit and Mockito dependencies:
-    ```xml
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.9.3</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.9.3</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.junit.platform</groupId>
-        <artifactId>junit-platform-commons</artifactId>
-        <version>1.9.3</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>4.5.1</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-junit-jupiter</artifactId>
-        <version>4.5.1</version>
-        <scope>test</scope>
-    </dependency>
-    ```
-
-2. **Run Tests Using Maven**: Navigate to the server directory and run the following command:
+Navigate to the server directory and run the following command to run the test with Maven:
     ```sh
     mvn test
     ```
