@@ -273,7 +273,7 @@ const AdminManagement = () => {
 
       <div className={styles.userList}>
         <h2>All Users</h2>
-        <form onSubmit={handleSearch}>
+        <form onSubmit={handleSearch} className={styles.search}>
           <input
             type="text"
             value={searchQuery}
