@@ -21,25 +21,27 @@ const App = () => {
       <Router>
         <div className={styles.container}>
           <Navigation />
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:productId" element={<Product />} />
-            <Route element={<PrivateRoute inverse redirectPath="/" />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/create-account" element={<CreateAccount />} />
-            </Route>
-            <Route element={<PrivateRoute />}>
-              <Route path="/admin/management" element={<AdminManagement />} />
-              <Route path="/user/profile" element={<UserProfile />} />
-              <Route
-                path="/user/create-account"
-                element={<UserCreateAccount />}
-              />
-              <Route path="/user/basket" element={<Basket />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-            </Route>
-          </Routes>
+          <div className={styles.inner}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:productId" element={<Product />} />
+              <Route element={<PrivateRoute inverse redirectPath="/" />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/create-account" element={<CreateAccount />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path="/admin/management" element={<AdminManagement />} />
+                <Route path="/user/profile" element={<UserProfile />} />
+                <Route
+                  path="/user/create-account"
+                  element={<UserCreateAccount />}
+                />
+                <Route path="/user/basket" element={<Basket />} />
+                <Route path="/change-password" element={<ChangePassword />} />
+              </Route>
+            </Routes>
+          </div>
         </div>
       </Router>
     </UserProvider>

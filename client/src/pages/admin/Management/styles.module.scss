@@ -1,10 +1,6 @@
 @import '../../../css/variables.module.scss';
 
-.adminManagement {
-  .header {
-    // Add your styles for the header here
-  }
-
+.adminManagement { 
   .createProduct {
     border: $border-grey;
     padding: 2em;
@@ -62,8 +58,13 @@
       list-style: none;
       padding: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: 1fr;
       gap: 1em;
+      max-width: $max-content-width;
+
+      @media (min-width: 769px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
     }
 
     li {
@@ -107,6 +108,7 @@
 
   .userList {
     margin-top: 2em;
+    max-width: $max-content-width;
 
     h2 {
       margin-bottom: 1em;
@@ -201,8 +203,13 @@
 
     form {
       display: flex;
+      flex-direction: column;
       gap: 1em;
       margin-bottom: 1em;
+
+      @media (min-width: 769px) {
+        flex-direction: row;
+      }
 
       label {
         display: flex;
